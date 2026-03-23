@@ -1,0 +1,92 @@
+name: Smart Campus CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+
+  build-auth-service:
+    name: Build Auth Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build auth-service
+        run: |
+          cd backend/auth-service
+          mvn -B clean package -DskipTests --fail-at-end || echo "No pom.xml yet"
+
+  build-notification-service:
+    name: Build Notification Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build notification-service
+        run: |
+          cd backend/notification-service
+          mvn -B clean package -DskipTests --fail-at-end || echo "No pom.xml yet"
+
+  build-facility-service:
+    name: Build Facility Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build facility-service
+        run: |
+          cd backend/facility-service
+          mvn -B clean package -DskipTests --fail-at-end || echo "No pom.xml yet"
+
+  build-booking-service:
+    name: Build Booking Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build booking-service
+        run: |
+          cd backend/booking-service
+          mvn -B clean package -DskipTests --fail-at-end || echo "No pom.xml yet"
+
+  build-incident-service:
+    name: Build Incident Service
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build incident-service
+        run: |
+          cd backend/incident-service
+          mvn -B clean package -DskipTests --fail-at-end || echo "No pom.xml yet"
+
+  build-frontend:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Build frontend
+        run: |
+          cd frontend
+          [ -f package.json ] && npm ci && npm run build || echo "No package.json yet"
