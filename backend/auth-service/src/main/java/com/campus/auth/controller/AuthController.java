@@ -2,10 +2,12 @@ package com.campus.auth.controller;
 
 import com.campus.auth.model.User;
 import com.campus.auth.repository.UserRepository;
+import com.campus.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -14,6 +16,36 @@ import java.util.List;
 public class AuthController {
 
     private final UserRepository userRepository;
+    private final AuthService authService;
+
+    // POST register
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody Map<String, String> body) {
+        try {
+            String token = authService.register(
+                    body.get("name"),
+                    body.get("email"),
+                    body.get("password")
+            );
+            return ResponseEntity.ok(Map.of("token", token));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
+
+    // POST login
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
+        try {
+            String token = authService.login(
+                    body.get("email"),
+                    body.get("password")
+            );
+            return ResponseEntity.ok(Map.of("token", token));
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
+    }
 
     // GET all users (Admin only)
     @GetMapping("/users")
