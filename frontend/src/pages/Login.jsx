@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,11 @@ function Login() {
     setLoading(true); setError('');
     try {
       const res = await axios.post('http://localhost:8081/api/auth/login', { email, password });
-      localStorage.setItem('token', res.data.token);
+      const token = res.data.token;
+      const decoded = jwtDecode(token);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', decoded.role);    // save role
+      localStorage.setItem('userName', decoded.sub); // save email as username
       navigate('/dashboard');
     } catch {
       setError('Invalid email or password. Please try again.');
