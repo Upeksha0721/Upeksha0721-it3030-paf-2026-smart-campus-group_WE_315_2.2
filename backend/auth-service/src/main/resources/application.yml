@@ -18,3 +18,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            # WHAT YOU HAVE NOW (dangerous):
+client-id: ${GOOGLE_CLIENT_ID}
+client-secret: ${GOOGLE_CLIENT_SECRET}
+            

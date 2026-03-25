@@ -5,6 +5,7 @@ import com.campus.auth.repository.UserRepository;
 import com.campus.auth.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -41,5 +42,23 @@ public class AuthService {
         }
 
         return jwtUtil.generateToken(email, user.getRole().name());
+    }
+
+    // Google OAuth2 login — finds or creates user, returns JWT
+    public String loginWithGoogle(OAuth2User oAuth2User) {
+        String email = oAuth2User.getAttribute("email");
+        String name = oAuth2User.getAttribute("name");
+
+        User user = userRepository.findByEmail(email)
+                .orElseGet(() -> {
+                    User newUser = new User();
+                    newUser.setName(name);
+                    newUser.setEmail(email);
+                    newUser.setPassword(""); // No password for OAuth users
+                    newUser.setRole(User.Role.USER);
+                    return userRepository.save(newUser);
+                });
+
+        return jwtUtil.generateToken(user.getEmail(), user.getRole().name());
     }
 }
