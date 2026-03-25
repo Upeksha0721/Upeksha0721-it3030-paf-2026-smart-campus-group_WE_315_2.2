@@ -83,6 +83,12 @@ function Login() {
         <a href="http://localhost:8081/oauth2/authorization/google" style={{ ...S.googleBtn, textDecoration: 'none' }}>
           🔵 Sign in with Google
         </a>
+        <div style={{ textAlign: 'center', marginTop: 20, color: '#64748b', fontSize: 13 }}>
+  Don't have an account?{' '}
+  <a href="/register" style={{ color: '#f5c400', fontWeight: 600, textDecoration: 'none' }}>
+    Create Account
+  </a>
+</div>
       </div>
     </div>
   );
