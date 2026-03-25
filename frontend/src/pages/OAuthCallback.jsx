@@ -1,40 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function OAuthCallback() {
   const navigate = useNavigate();
+  const handled = useRef(false);
 
   useEffect(() => {
+    if (handled.current) return; // prevent double run
+    handled.current = true;
+
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
 
-    if (token) {
-      // 1. Store the raw token for API calls
+    console.log('OAuth callback hit, token:', token);
+
+    if (token && token.length > 0) {
       localStorage.setItem('token', token);
-
-      try {
-        // 2. Simple Base64 decode to get user info (Sub, Role)
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        localStorage.setItem('user', JSON.stringify({
-          email: payload.sub,
-          role: payload.role // This supports your "ADMIN/USER" requirement 
-        }));
-
-        console.log("Login Successful. Role:", payload.role);
-        navigate('/dashboard');
-      } catch (error) {
-        console.error("Invalid Token Format", error);
-        navigate('/login');
-      }
+      navigate('/dashboard', { replace: true });
     } else {
-      navigate('/login');
+      navigate('/login', { replace: true });
     }
   }, [navigate]);
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '100px' }}>
-      <h2>Authenticating with Smart Campus Hub...</h2>
-      <p>Please wait while we secure your session.</p>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#0f1729', color: 'white', fontSize: '18px' }}>
+      ⏳ Completing Google login...
     </div>
   );
 }
