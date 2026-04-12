@@ -5,6 +5,8 @@ import OAuthCallback from './pages/OAuthCallback';
 import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import StaffDashboard from './pages/StaffDashboard';
+import FacilityAdminPage from './pages/FacilityAdminPage';
+import FacilityStudentPage from './pages/FacilityStudentPage';
 
 function PrivateRoute({ children }) {
   return localStorage.getItem('token') ? children : <Navigate to="/login" />;
@@ -12,7 +14,10 @@ function PrivateRoute({ children }) {
 
 function DashboardRouter() {
   const role = localStorage.getItem('role');
+  console.log('Current role from localStorage:', role);
+
   if (role === 'ADMIN') return <AdminDashboard />;
+  if (role === 'STAFF') return <StaffDashboard />;
   if (role === 'TECHNICIAN') return <StaffDashboard />;
   return <StudentDashboard />;
 }
@@ -24,10 +29,38 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/oauth2/callback" element={<OAuthCallback />} />
-        <Route path="/dashboard" element={<PrivateRoute><DashboardRouter /></PrivateRoute>} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <DashboardRouter />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/facilities"
+          element={
+            <PrivateRoute>
+              <FacilityAdminPage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/student/facilities"
+          element={
+            <PrivateRoute>
+              <FacilityStudentPage />
+            </PrivateRoute>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );
 }
+
 export default App;
