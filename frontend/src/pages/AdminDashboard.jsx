@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityAdminPage from './FacilityAdminPage';
+import IncidentList from './IncidentList';
 
 const Placeholder = ({ title, member, description }) => (
   <div style={{ padding: 40, textAlign: 'center' }}>
@@ -193,13 +194,7 @@ function AdminDashboard() {
         return <FacilityAdminPage />;
 
       case 'All Incidents':
-        return (
-          <Placeholder
-            title="All Incidents"
-            member="👤 Member 3 — Incident Service"
-            description="Connect to incident-service on port 8085 to manage all incident tickets."
-          />
-        );
+        return <IncidentList />;
 
       case 'User Management':
         return (

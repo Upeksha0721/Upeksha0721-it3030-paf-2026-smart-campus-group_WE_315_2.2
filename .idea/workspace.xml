@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86d6cbfd-ccc6-4211-9fdb-154385489c95" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/controller/FacilityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/filter/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/model/Facility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/repository/FacilityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/service/FacilityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/util/JwtUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/incident/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +32,13 @@
     &quot;accountId&quot;: &quot;e3234159-b634-4818-8b49-d01af54d12f5&quot;
   }
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3,
   &quot;fromUser&quot;: false
@@ -57,16 +50,22 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.DemoApplicationTests.executor": "Run",
+    "Gradle.Tests in 'auth-service'.executor": "Run",
+    "JUnit.DemoApplicationTests.executor": "Run",
     "Maven.demo [clean].executor": "Run",
     "Maven.demo [deploy].executor": "Run",
     "Maven.demo [install].executor": "Run",
     "Maven.demo [test].executor": "Run",
     "Maven.incident.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.DemoApplication.executor": "Run",
-    "git-widget-placeholder": "#3 on develop",
+    "git-widget-placeholder": "feature/incident-service",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/ASUS/IdeaProjects/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/incident-service/src/main/java/com/campus/filter",
     "project.structure.last.edited": "Project",
@@ -86,6 +85,84 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.DemoApplication">
+    <configuration name="DemoApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/auth-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.example.demo.DemoApplicationTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'auth-service'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/auth-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="DemoApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.campus.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.campus.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.campus.demo.DemoApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="auth-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="auth-service" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <configuration name="incident" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -131,6 +208,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.DemoApplication" />
+        <item itemvalue="Gradle.Tests in 'auth-service'" />
+        <item itemvalue="Gradle.DemoApplicationTests" />
+        <item itemvalue="JUnit.DemoApplicationTests" />
       </list>
     </recent_temporary>
   </component>

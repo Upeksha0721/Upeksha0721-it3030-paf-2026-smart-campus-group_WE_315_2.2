@@ -7,6 +7,9 @@ import AdminDashboard from './pages/AdminDashboard';
 import StaffDashboard from './pages/StaffDashboard';
 import FacilityAdminPage from './pages/FacilityAdminPage';
 import FacilityStudentPage from './pages/FacilityStudentPage';
+import IncidentList from './pages/IncidentList';
+import IncidentDetails from './pages/IncidentDetails';
+import CreateIncident from './pages/CreateIncident';
 
 function PrivateRoute({ children }) {
   return localStorage.getItem('token') ? children : <Navigate to="/login" />;
@@ -53,6 +56,32 @@ function App() {
           element={
             <PrivateRoute>
               <FacilityStudentPage />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Incident Module Routes */}
+        <Route
+          path="/incidents"
+          element={
+            <PrivateRoute>
+              <IncidentList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/incidents/create"
+          element={
+            <PrivateRoute>
+              <CreateIncident />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/incidents/:id"
+          element={
+            <PrivateRoute>
+              <IncidentDetails />
             </PrivateRoute>
           }
         />

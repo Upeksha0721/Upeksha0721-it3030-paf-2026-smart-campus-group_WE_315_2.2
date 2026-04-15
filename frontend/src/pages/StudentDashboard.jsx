@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityStudentPage from './FacilityStudentPage';
+import IncidentList from './IncidentList';
 
 // ── Placeholder pages for teammates ──────────────────────────────────────────
 const Placeholder = ({ title, member, description }) => (
@@ -55,7 +56,7 @@ function Overview({ name, setActive }) {
           <div style={S.cardTitle}>Quick Actions</div>
 
           <button style={S.btnYellow}>+ New Booking Request</button>
-          <button style={S.btnOutline}>+ Report Incident</button>
+          <button style={S.btnOutline} onClick={() => setActive('Incidents')}>+ Report Incident</button>
           <button style={S.btnOutline} onClick={() => setActive('Facilities')}>
             View All Facilities
           </button>
@@ -123,13 +124,7 @@ function StudentDashboard() {
         return <FacilityStudentPage />;
 
       case 'Incidents':
-        return (
-          <Placeholder
-            title="Incidents"
-            member="👤 Member 3 — Incident Service"
-            description="Connect to incident-service on port 8085 to create and track incident tickets."
-          />
-        );
+        return <IncidentList />;
 
       case 'Notifications':
         return (
@@ -237,7 +232,7 @@ const S = {
   },
   navActive: {
     color: '#FFC107',
-    borderLeftColor: '#FFC107',
+    borderLeft: '3px solid #FFC107',
     background: '#122A42',
   },
   main: {
