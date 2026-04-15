@@ -9,13 +9,11 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @org.springframework.beans.factory.annotation.Value("${jwt.secret}")
-    private String secret;
-
+    private static final String SECRET = "smartcampus2026secretkey1234567890abcdef";
     private static final long EXPIRATION = 86400000; // 24 hours
 
     private Key getKey() {
-        return Keys.hmacShaKeyFor(secret.getBytes());
+        return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
     // Generate token from email
