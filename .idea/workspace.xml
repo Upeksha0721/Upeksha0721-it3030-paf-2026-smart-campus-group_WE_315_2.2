@@ -5,21 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86d6cbfd-ccc6-4211-9fdb-154385489c95" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2.iml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/controller/FacilityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/filter/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/model/Facility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/repository/FacilityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/service/FacilityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/util/JwtUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/incident/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/campus/auth/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/campus/auth/util/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/build/classes/java/main/com/campus/facility/dto/FacilityResponseDto$FacilityResponseDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/build/classes/java/main/com/campus/facility/dto/FacilityResponseDto$FacilityResponseDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/build/classes/java/main/com/campus/facility/entity/Facility$FacilityBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/build/classes/java/main/com/campus/facility/entity/Facility$FacilityBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/demo/DemoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/demo/DemoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/filter/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/filter/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/util/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/incident-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AdminDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AdminDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/StaffDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/StaffDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/StudentDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/StudentDashboard.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +69,13 @@
     &quot;accountId&quot;: &quot;e3234159-b634-4818-8b49-d01af54d12f5&quot;
   }
 }</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3,
   &quot;fromUser&quot;: false
@@ -55,26 +85,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.demo [clean].executor": "Run",
-    "Maven.demo [deploy].executor": "Run",
-    "Maven.demo [install].executor": "Run",
-    "Maven.demo [test].executor": "Run",
-    "Maven.incident.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.DemoApplication.executor": "Run",
-    "git-widget-placeholder": "#3 on develop",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ASUS/IdeaProjects/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/incident-service/src/main/java/com/campus/filter",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.build"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.DemoApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Tests in 'auth-service'.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.DemoApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.demo [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.demo [deploy].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.demo [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.demo [test].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.incident.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.DemoApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#3 on develop&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ASUS/IdeaProjects/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/incident-service/src/main/java/com/campus/filter&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.build&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ASUS\IdeaProjects\Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2\backend\Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2\backend\incident-service\src\main\java\com\campus\filter" />
@@ -86,6 +121,84 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.DemoApplication">
+    <configuration name="DemoApplicationTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/auth-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.example.demo.DemoApplicationTests&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'auth-service'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend/auth-service" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="DemoApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="demo" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.campus.demo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.campus.demo" />
+      <option name="MAIN_CLASS_NAME" value="com.campus.demo.DemoApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="auth-service" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="auth-service" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <configuration name="incident" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -131,6 +244,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.DemoApplication" />
+        <item itemvalue="Gradle.Tests in 'auth-service'" />
+        <item itemvalue="Gradle.DemoApplicationTests" />
+        <item itemvalue="JUnit.DemoApplicationTests" />
       </list>
     </recent_temporary>
   </component>
