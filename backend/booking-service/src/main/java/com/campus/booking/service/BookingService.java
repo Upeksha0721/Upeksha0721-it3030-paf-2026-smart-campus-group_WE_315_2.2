@@ -17,6 +17,20 @@ public class BookingService {
     }
 
     public Booking createBooking(Booking booking) {
+        // Check for scheduling conflicts
+        List<Booking> conflicts = bookingRepository
+                .findByResourceNameAndStatusNotAndBookingDateAndStartTimeLessThanAndEndTimeGreaterThan(
+                        booking.getResourceName(),
+                        Booking.BookingStatus.CANCELLED,
+                        booking.getBookingDate(),
+                        booking.getEndTime(),
+                        booking.getStartTime()
+                );
+
+        if (!conflicts.isEmpty()) {
+            throw new RuntimeException("Scheduling conflict: resource already booked for this time.");
+        }
+
         booking.setStatus(Booking.BookingStatus.PENDING);
         return bookingRepository.save(booking);
     }

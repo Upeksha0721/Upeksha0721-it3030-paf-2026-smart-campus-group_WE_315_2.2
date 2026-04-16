@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-253.32098.37">
+  <component name="dataSourceStorageLocal" created-in="IU-261.22158.277">
     <data-source name="campus_auth@localhost" uuid="557987aa-c0d2-4d11-a0c7-36bd3ee2f45b">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL_AURORA" />
       <schema-mapping />
     </data-source>
   </component>

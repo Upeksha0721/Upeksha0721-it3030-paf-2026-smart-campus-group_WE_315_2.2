@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityStudentPage from './FacilityStudentPage';
+import MyBookings from './MyBookings';
 
 // ── Placeholder pages for teammates ──────────────────────────────────────────
 const Placeholder = ({ title, member, description }) => (
@@ -54,7 +55,9 @@ function Overview({ name, setActive }) {
         <div style={S.card}>
           <div style={S.cardTitle}>Quick Actions</div>
 
-          <button style={S.btnYellow}>+ New Booking Request</button>
+          <button style={S.btnYellow} onClick={() => setActive('My Bookings')}>
+            + New Booking Request
+          </button>
           <button style={S.btnOutline}>+ Report Incident</button>
           <button style={S.btnOutline} onClick={() => setActive('Facilities')}>
             View All Facilities
@@ -111,13 +114,7 @@ function StudentDashboard() {
         return <Overview name={name} setActive={setActive} />;
 
       case 'My Bookings':
-        return (
-          <Placeholder
-            title="My Bookings"
-            member="👤 Member 2 — Booking Service"
-            description="Connect to booking-service on port 8084 to show and manage user bookings."
-          />
-        );
+        return <MyBookings />;
 
       case 'Facilities':
         return <FacilityStudentPage />;
@@ -194,8 +191,8 @@ function StudentDashboard() {
         <div
           style={{
             ...S.content,
-            padding: active === 'Facilities' ? 0 : 20,
-            background: active === 'Facilities' ? '#091A2F' : 'transparent',
+            padding: active === 'Facilities' || active === 'My Bookings' ? 0 : 20,
+            background: active === 'Facilities' || active === 'My Bookings' ? '#091A2F' : 'transparent',
           }}
         >
           {renderContent()}

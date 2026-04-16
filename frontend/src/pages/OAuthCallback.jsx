@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function OAuthCallback() {
   const navigate = useNavigate();
@@ -15,7 +16,10 @@ function OAuthCallback() {
     console.log('OAuth callback hit, token:', token);
 
     if (token && token.length > 0) {
+      const decoded = jwtDecode(token);
       localStorage.setItem('token', token);
+      localStorage.setItem('role', decoded.role);
+      localStorage.setItem('userName', decoded.sub);
       navigate('/dashboard', { replace: true });
     } else {
       navigate('/login', { replace: true });

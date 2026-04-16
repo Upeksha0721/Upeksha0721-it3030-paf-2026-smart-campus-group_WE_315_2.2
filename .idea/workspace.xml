@@ -5,31 +5,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86d6cbfd-ccc6-4211-9fdb-154385489c95" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/controller/FacilityController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/filter/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/model/Facility.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/repository/FacilityRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/JwtUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/security/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/service/FacilityService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/util/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/md5-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/facility-service/build/resolvedMainClassName" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/AdminBookings.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/CreateBooking.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/pages/MyBookings.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/bookingService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/incident-service/src/main/java/com/campus/incident/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/campus/auth/filter/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/campus/auth/filter/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/campus/auth/util/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/auth-service/src/main/java/com/campus/auth/util/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/repository/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/repository/BookingRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/security/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/security/JwtFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/security/JwtUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/security/JwtUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/service/BookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/booking-service/src/main/java/com/campus/booking/service/BookingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/8.14/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/build/reports/problems/problems-report.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/facility-service/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/backend/facility-service/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/AdminDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/AdminDashboard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/OAuthCallback.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/OAuthCallback.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/StudentDashboard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/StudentDashboard.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="226" />
+  </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$/backend/auth-service">
       <ProjectState />
     </projectState>
+    <projectState path="$PROJECT_DIR$/backend/facility-service">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JSX File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -46,6 +85,10 @@
     &quot;accountId&quot;: &quot;e3234159-b634-4818-8b49-d01af54d12f5&quot;
   }
 }</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3,
   &quot;fromUser&quot;: false
@@ -62,17 +105,28 @@
     "Maven.demo [install].executor": "Run",
     "Maven.demo [test].executor": "Run",
     "Maven.incident.executor": "Run",
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.DemoApplication.executor": "Run",
-    "git-widget-placeholder": "#3 on develop",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "feature/booking-service",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/ASUS/IdeaProjects/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2/backend/incident-service/src/main/java/com/campus/filter",
+    "last_opened_file_path": "C:/Users/USER/Desktop/Upeksha0721-it3030-paf-2026-smart-campus-group_WE_315_2.2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "configurable.group.build"
+    "settings.editor.selected.configurable": "ml.llm.AcpAgentsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -128,6 +182,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FacilityServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="facility-service.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.campus.facility.FacilityServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.DemoApplication" />
@@ -148,15 +209,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1775381251815</updated>
+      <workItem from="1776190670674" duration="86000" />
+      <workItem from="1776190830620" duration="1224000" />
+      <workItem from="1776224463927" duration="731000" />
+      <workItem from="1776233447380" duration="2088000" />
+      <workItem from="1776237618737" duration="4659000" />
+      <workItem from="1776256720110" duration="3106000" />
+      <workItem from="1776269342421" duration="3433000" />
+      <workItem from="1776272928242" duration="297000" />
+      <workItem from="1776278384280" duration="6366000" />
+      <workItem from="1776352489947" duration="2802000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

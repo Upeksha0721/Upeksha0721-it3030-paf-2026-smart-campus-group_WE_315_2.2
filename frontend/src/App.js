@@ -7,6 +7,12 @@ import AdminDashboard from './pages/AdminDashboard';
 import StaffDashboard from './pages/StaffDashboard';
 import FacilityAdminPage from './pages/FacilityAdminPage';
 import FacilityStudentPage from './pages/FacilityStudentPage';
+import CreateBooking from './pages/CreateBooking';
+import MyBookings from './pages/MyBookings';
+import AdminBookings from './pages/AdminBookings';
+
+
+
 
 function PrivateRoute({ children }) {
   return localStorage.getItem('token') ? children : <Navigate to="/login" />;
@@ -53,6 +59,33 @@ function App() {
           element={
             <PrivateRoute>
               <FacilityStudentPage />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/bookings/create"
+          element={
+            <PrivateRoute>
+              <CreateBooking />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/bookings"
+          element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/admin/bookings"
+          element={
+            <PrivateRoute>
+              <AdminBookings />
             </PrivateRoute>
           }
         />

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityAdminPage from './FacilityAdminPage';
+import AdminBookings from './AdminBookings';
 
 const Placeholder = ({ title, member, description }) => (
   <div style={{ padding: 40, textAlign: 'center' }}>
@@ -181,13 +182,7 @@ function AdminDashboard() {
         return <Overview />;
 
       case 'Booking Requests':
-        return (
-          <Placeholder
-            title="Booking Requests"
-            member="👤 Member 2 — Booking Service"
-            description="Connect to booking-service on port 8084 to approve or reject booking requests."
-          />
-        );
+        return <AdminBookings />;
 
       case 'Facility Catalogue':
         return <FacilityAdminPage />;
@@ -278,8 +273,8 @@ function AdminDashboard() {
         <div
           style={{
             ...S.content,
-            padding: active === 'Facility Catalogue' ? 0 : 20,
-            background: active === 'Facility Catalogue' ? '#091A2F' : 'transparent',
+            padding: active === 'Facility Catalogue' || active === 'Booking Requests' ? 0 : 20,
+            background: active === 'Facility Catalogue' || active === 'Booking Requests' ? '#091A2F' : 'transparent',
           }}
         >
           {renderContent()}
