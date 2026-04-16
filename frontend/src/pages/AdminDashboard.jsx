@@ -255,14 +255,7 @@ function AdminDashboard() {
 
       <div style={S.main}>
         <div style={S.topbar}>
-          <input
-            style={S.search}
-            placeholder={
-              active === 'Facility Catalogue'
-                ? 'Search facilities...'
-                : 'Search users, bookings...'
-            }
-          />
+          <div style={S.topbarSpacer}></div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={S.bell}>🔔</div>
@@ -337,14 +330,8 @@ const S = {
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  search: {
-    background: '#122A42',
-    border: '1px solid #1A3A5A',
-    borderRadius: 8,
-    padding: '7px 14px',
-    color: '#fff',
-    fontSize: 13,
-    width: 220,
+  topbarSpacer: {
+    flex: 1,
   },
   bell: {
     width: 32,

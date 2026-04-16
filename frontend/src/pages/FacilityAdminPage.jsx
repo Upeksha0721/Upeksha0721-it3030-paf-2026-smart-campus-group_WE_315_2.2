@@ -102,8 +102,6 @@ function FacilityAdminPage() {
             Add, update, delete, and search campus facilities and assets.
           </p>
         </div>
-
-        <div style={styles.badge}>Module A</div>
       </div>
 
       {message && <div style={styles.message}>{message}</div>}
@@ -153,9 +151,19 @@ function FacilityAdminPage() {
             type="number"
             placeholder="Minimum Capacity"
             value={filters.minCapacity}
-            onChange={(e) =>
-              setFilters({ ...filters, minCapacity: e.target.value })
-            }
+            min="0"
+            onKeyDown={(e) => {
+              if (e.key === "-" || e.key === "e") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              if (value === "" || Number(value) >= 0) {
+                setFilters({ ...filters, minCapacity: value });
+              }
+            }}
             style={styles.input}
           />
 
@@ -224,15 +232,6 @@ const styles = {
     marginBottom: 0,
     color: "#A0B0C4",
     fontSize: "14px",
-  },
-  badge: {
-    background: "#2A1A0A",
-    color: "#FFC107",
-    padding: "8px 14px",
-    borderRadius: "999px",
-    fontSize: "12px",
-    fontWeight: 700,
-    whiteSpace: "nowrap",
   },
   message: {
     background: "#1a3a5a",
