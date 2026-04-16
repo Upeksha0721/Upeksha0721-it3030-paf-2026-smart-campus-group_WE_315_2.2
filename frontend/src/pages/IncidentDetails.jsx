@@ -76,6 +76,10 @@ const IncidentDetails = () => {
     };
 
     const handleAssign = async () => {
+        if (!techId) {
+            alert('Please select a technician first');
+            return;
+        }
         try {
             await incidentService.assignTechnician(id, techId);
             alert('Technician assigned successfully');
