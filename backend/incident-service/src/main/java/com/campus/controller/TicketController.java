@@ -87,4 +87,18 @@ public class TicketController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/summary")
+    public ResponseEntity<TicketSummaryDTO> getTicketSummary() {
+        return ResponseEntity.ok(incidentService.getTicketSummary());
+    }
+
+    @PostMapping("/report/download")
+    public ResponseEntity<byte[]> downloadReport(@RequestBody(required = false) ReportRequestDTO request) {
+        byte[] pdfBytes = incidentService.generateReport(request);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("filename", "incident-report.pdf");
+        return ResponseEntity.ok().headers(headers).body(pdfBytes);
+    }
 }

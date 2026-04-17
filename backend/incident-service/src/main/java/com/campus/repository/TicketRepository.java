@@ -9,4 +9,10 @@ import java.util.List;
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
     List<Ticket> findByUserId(String userId);
     List<Ticket> findByAssignedTechnicianId(String technicianId);
+    
+    long countByStatus(com.campus.model.TicketStatus status);
+    
+    long countByStatusAndCreatedAtBetween(com.campus.model.TicketStatus status, java.time.LocalDateTime start, java.time.LocalDateTime end);
+    
+    java.util.List<Ticket> findByCreatedAtBetweenOrderByCreatedAtDesc(java.time.LocalDateTime start, java.time.LocalDateTime end);
 }
