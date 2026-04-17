@@ -110,7 +110,7 @@ function StaffDashboard() {
     switch (active) {
       case 'My Tasks':    return <MyTasks />;
       case 'All Tickets': return <IncidentList />;
-      case 'Completed':   return <IncidentList />;
+      case 'Completed':   return <IncidentList mode="completed" />;
       case 'Facilities':  return <Placeholder title="Facilities" member="👤 Member 1 — Facility Service" description="Connect to facility-service on port 8083 to browse campus facilities." />;
       case 'Schedule':    return <Placeholder title="My Schedule" member="👤 Member 3 — Incident Service" description="Connect to incident-service on port 8085 to view assigned task schedule." />;
       case 'Account':     return <Placeholder title="Account Settings" member="👤 Member 4 (You) — Auth Service" description="Connect to auth-service on port 8081 to manage profile and settings." />;
