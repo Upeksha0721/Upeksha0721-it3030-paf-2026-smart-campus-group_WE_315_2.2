@@ -241,7 +241,7 @@ const styles = {
     background: "#112b46",
     padding: "20px",
     borderRadius: "12px",
-    color: "white",
+    color: 'var(--text-primary)',
     marginBottom: "20px",
   },
   form: {
@@ -253,7 +253,7 @@ const styles = {
     gap: "6px",
   },
   label: {
-    color: "#ffffff",
+    color: 'var(--text-primary)',
     fontSize: "15px",
     fontWeight: 600,
   },
@@ -287,7 +287,7 @@ const styles = {
   },
   cancelBtn: {
     background: "#888",
-    color: "white",
+    color: 'var(--text-primary)',
     padding: "10px 16px",
     border: "none",
     borderRadius: "8px",
