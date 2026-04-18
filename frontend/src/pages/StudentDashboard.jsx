@@ -1,18 +1,23 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityStudentPage from './FacilityStudentPage';
+<<<<<<< HEAD
+import IncidentList from './IncidentList';
+=======
+import BookingStudentPage from './BookingStudentPage';
+>>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
 
 // ── Placeholder pages for teammates ──────────────────────────────────────────
 const Placeholder = ({ title, member, description }) => (
   <div style={{ padding: 40, textAlign: 'center' }}>
     <div style={{ fontSize: 48, marginBottom: 16 }}>🚧</div>
-    <div style={{ color: '#fff', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>
+    <div style={{ color: 'var(--text-primary)', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>
       {title}
     </div>
-    <div style={{ color: '#FFC107', fontSize: 13, fontWeight: 600, marginBottom: 12 }}>
+    <div style={{ color: 'var(--accent-color)', fontSize: 13, fontWeight: 600, marginBottom: 12 }}>
       {member}
     </div>
-    <div style={{ color: '#A0B0C4', fontSize: 14 }}>
+    <div style={{ color: 'var(--text-secondary)', fontSize: 14 }}>
       {description}
     </div>
   </div>
@@ -55,7 +60,7 @@ function Overview({ name, setActive }) {
           <div style={S.cardTitle}>Quick Actions</div>
 
           <button style={S.btnYellow}>+ New Booking Request</button>
-          <button style={S.btnOutline}>+ Report Incident</button>
+          <button style={S.btnOutline} onClick={() => setActive('Incidents')}>+ Report Incident</button>
           <button style={S.btnOutline} onClick={() => setActive('Facilities')}>
             View All Facilities
           </button>
@@ -65,14 +70,14 @@ function Overview({ name, setActive }) {
           <div style={S.cardTitle}>Upcoming Bookings</div>
 
           {[
-            ['Computer Lab A', 'Today 2:00–4:00 PM', '#0F4A2A', '#4ade80', 'Confirmed'],
-            ['Meeting Room 3', 'Tomorrow 10:00 AM', '#3D2A00', '#FFC107', 'Pending'],
-            ['Sports Hall B', 'Fri 4:00 PM', '#0F4A2A', '#4ade80', 'Confirmed'],
+            ['Computer Lab A', 'Today 2:00–4:00 PM', '#0F4A2A', 'var(--success-color)', 'Confirmed'],
+            ['Meeting Room 3', 'Tomorrow 10:00 AM', '#3D2A00', 'var(--accent-color)', 'Pending'],
+            ['Sports Hall B', 'Fri 4:00 PM', '#0F4A2A', 'var(--success-color)', 'Confirmed'],
           ].map(([name, time, bg, color, status]) => (
             <div key={name} style={S.bookingItem}>
               <div>
-                <div style={{ color: '#fff', fontSize: 13, fontWeight: 500 }}>{name}</div>
-                <div style={{ color: '#A0B0C4', fontSize: 11 }}>{time}</div>
+                <div style={{ color: 'var(--text-primary)', fontSize: 13, fontWeight: 500 }}>{name}</div>
+                <div style={{ color: 'var(--text-secondary)', fontSize: 11 }}>{time}</div>
               </div>
               <span
                 style={{
@@ -111,25 +116,13 @@ function StudentDashboard() {
         return <Overview name={name} setActive={setActive} />;
 
       case 'My Bookings':
-        return (
-          <Placeholder
-            title="My Bookings"
-            member="👤 Member 2 — Booking Service"
-            description="Connect to booking-service on port 8084 to show and manage user bookings."
-          />
-        );
+        return <BookingStudentPage />;
 
       case 'Facilities':
         return <FacilityStudentPage />;
 
       case 'Incidents':
-        return (
-          <Placeholder
-            title="Incidents"
-            member="👤 Member 3 — Incident Service"
-            description="Connect to incident-service on port 8085 to create and track incident tickets."
-          />
-        );
+        return <IncidentList />;
 
       case 'Notifications':
         return (
@@ -195,7 +188,7 @@ function StudentDashboard() {
           style={{
             ...S.content,
             padding: active === 'Facilities' ? 0 : 20,
-            background: active === 'Facilities' ? '#091A2F' : 'transparent',
+            background: active === 'Facilities' ? 'var(--bg-app)' : 'transparent',
           }}
         >
           {renderContent()}
@@ -209,13 +202,13 @@ const S = {
   page: {
     display: 'flex',
     minHeight: '100vh',
-    background: '#091A2F',
+    background: 'var(--bg-app)',
     fontFamily: 'Segoe UI, sans-serif',
   },
   sidebar: {
     width: 210,
-    background: '#0D2137',
-    borderRight: '1px solid #1A3A5A',
+    background: 'var(--bg-input)',
+    borderRight: '1px solid var(--border-color)',
     padding: '16px 0',
     flexShrink: 0,
   },
@@ -223,22 +216,28 @@ const S = {
     padding: '0 16px 20px',
     fontSize: 15,
     fontWeight: 700,
-    color: '#FFC107',
-    borderBottom: '1px solid #1A3A5A',
+    color: 'var(--accent-color)',
+    borderBottom: '1px solid var(--border-color)',
     marginBottom: 12,
   },
   navItem: {
     padding: '10px 16px',
     fontSize: 13,
-    color: '#A0B0C4',
+    color: 'var(--text-secondary)',
     cursor: 'pointer',
     borderLeft: '3px solid transparent',
     transition: 'all 0.15s',
   },
   navActive: {
+<<<<<<< HEAD
     color: '#FFC107',
-    borderLeftColor: '#FFC107',
+    borderLeft: '3px solid #FFC107',
     background: '#122A42',
+=======
+    color: 'var(--accent-color)',
+    borderLeftColor: 'var(--accent-color)',
+    background: 'var(--bg-card)',
+>>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
   },
   main: {
     flex: 1,
@@ -246,27 +245,27 @@ const S = {
     flexDirection: 'column',
   },
   topbar: {
-    background: '#0D2137',
-    borderBottom: '1px solid #1A3A5A',
+    background: 'var(--bg-input)',
+    borderBottom: '1px solid var(--border-color)',
     padding: '12px 20px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
   search: {
-    background: '#122A42',
-    border: '1px solid #1A3A5A',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: 8,
     padding: '7px 14px',
-    color: '#fff',
+    color: 'var(--text-primary)',
     fontSize: 13,
     width: 220,
   },
   bell: {
     width: 32,
     height: 32,
-    background: '#122A42',
-    border: '1px solid #1A3A5A',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: 8,
     display: 'flex',
     alignItems: 'center',
@@ -277,21 +276,21 @@ const S = {
   avatar: {
     width: 32,
     height: 32,
-    background: '#1A3A5A',
+    background: 'var(--border-color)',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 12,
     fontWeight: 700,
-    color: '#FFC107',
+    color: 'var(--accent-color)',
   },
   logout: {
     padding: '6px 12px',
     background: 'transparent',
-    border: '1px solid #1A3A5A',
+    border: '1px solid var(--border-color)',
     borderRadius: 8,
-    color: '#A0B0C4',
+    color: 'var(--text-secondary)',
     fontSize: 12,
     cursor: 'pointer',
   },
@@ -300,13 +299,13 @@ const S = {
     flex: 1,
   },
   welcomeTitle: {
-    color: '#fff',
+    color: 'var(--text-primary)',
     fontSize: 20,
     fontWeight: 600,
     marginBottom: 4,
   },
   welcomeSub: {
-    color: '#A0B0C4',
+    color: 'var(--text-secondary)',
     fontSize: 13,
     marginBottom: 20,
   },
@@ -317,20 +316,20 @@ const S = {
     marginBottom: 20,
   },
   statCard: {
-    background: '#122A42',
-    border: '1px solid #1A3A5A',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: 10,
     padding: 14,
-    borderTop: '3px solid #FFC107',
+    borderTop: '3px solid var(--accent-color)',
   },
   statLabel: {
-    color: '#A0B0C4',
+    color: 'var(--text-secondary)',
     fontSize: 11,
     marginBottom: 6,
     textTransform: 'uppercase',
   },
   statValue: {
-    color: '#fff',
+    color: 'var(--text-primary)',
     fontSize: 22,
     fontWeight: 700,
   },
@@ -340,20 +339,20 @@ const S = {
     gap: 16,
   },
   card: {
-    background: '#122A42',
-    border: '1px solid #1A3A5A',
+    background: 'var(--bg-card)',
+    border: '1px solid var(--border-color)',
     borderRadius: 10,
     padding: 16,
   },
   cardTitle: {
-    color: '#fff',
+    color: 'var(--text-primary)',
     fontSize: 13,
     fontWeight: 600,
     marginBottom: 14,
   },
   btnYellow: {
-    background: '#FFC107',
-    color: '#091A2F',
+    background: 'var(--accent-color)',
+    color: 'var(--bg-app)',
     border: 'none',
     padding: '9px 16px',
     borderRadius: 8,
@@ -365,8 +364,8 @@ const S = {
   },
   btnOutline: {
     background: 'transparent',
-    color: '#FFC107',
-    border: '1px solid #FFC107',
+    color: 'var(--accent-color)',
+    border: '1px solid var(--accent-color)',
     padding: '9px 16px',
     borderRadius: 8,
     fontSize: 12,
@@ -380,7 +379,7 @@ const S = {
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: '10px 0',
-    borderBottom: '1px solid #1A3A5A',
+    borderBottom: '1px solid var(--border-color)',
   },
 };
 

@@ -2,6 +2,7 @@ package com.campus.auth.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
@@ -9,11 +10,13 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET = "smartcampus2026secretkey1234567890abcdef";
+    @Value("${jwt.secret:SmartCampus2026SecretKeyForJWTTokenGeneration}")
+    private String secret;
+
     private static final long EXPIRATION = 86400000; // 24 hours
 
     private Key getKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     // Generate token from email
@@ -35,6 +38,16 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    // Get role from token
+    public String extractRole(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role", String.class);
     }
 
     // Validate token
