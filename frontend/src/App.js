@@ -2,24 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import OAuthCallback from './pages/OAuthCallback';
-import StudentDashboard from './pages/StudentDashboard';
-import AdminDashboard from './pages/AdminDashboard';
-import StaffDashboard from './pages/StaffDashboard';
-import FacilityAdminPage from './pages/FacilityAdminPage';
-import FacilityStudentPage from './pages/FacilityStudentPage';
+import IncidentList from './pages/IncidentList';
+import IncidentDetails from './pages/IncidentDetails';
+import CreateIncident from './pages/CreateIncident';
+import DashboardShell from './pages/DashboardShell';
 
 function PrivateRoute({ children }) {
   return localStorage.getItem('token') ? children : <Navigate to="/login" />;
-}
-
-function DashboardRouter() {
-  const role = localStorage.getItem('role');
-  console.log('Current role from localStorage:', role);
-
-  if (role === 'ADMIN') return <AdminDashboard />;
-  if (role === 'STAFF') return <StaffDashboard />;
-  if (role === 'TECHNICIAN') return <StaffDashboard />;
-  return <StudentDashboard />;
 }
 
 function App() {
@@ -31,28 +20,39 @@ function App() {
         <Route path="/oauth2/callback" element={<OAuthCallback />} />
 
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <PrivateRoute>
-              <DashboardRouter />
+              <DashboardShell />
             </PrivateRoute>
           }
         />
 
+        <Route path="/admin/facilities" element={<Navigate to="/dashboard/facilities" replace />} />
+        <Route path="/student/facilities" element={<Navigate to="/dashboard/facilities" replace />} />
+
+        {/* Incident Module Routes */}
         <Route
-          path="/admin/facilities"
+          path="/incidents"
           element={
             <PrivateRoute>
-              <FacilityAdminPage />
+              <IncidentList />
             </PrivateRoute>
           }
         />
-
         <Route
-          path="/student/facilities"
+          path="/incidents/create"
           element={
             <PrivateRoute>
-              <FacilityStudentPage />
+              <CreateIncident />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/incidents/:id"
+          element={
+            <PrivateRoute>
+              <IncidentDetails />
             </PrivateRoute>
           }
         />

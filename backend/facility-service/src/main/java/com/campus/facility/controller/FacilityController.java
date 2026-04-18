@@ -3,6 +3,7 @@ package com.campus.facility.controller;
 import com.campus.facility.dto.FacilityRequestDto;
 import com.campus.facility.dto.FacilityResponseDto;
 import com.campus.facility.entity.Facility;
+import com.campus.facility.enums.FacilityStatus;
 import com.campus.facility.enums.FacilityType;
 import com.campus.facility.repository.FacilityRepository;
 import com.campus.facility.service.FacilityService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/facilities")
@@ -50,6 +52,25 @@ public class FacilityController {
     // =========================
     // GET FACILITY BY ID
     // =========================
+    @GetMapping("/stats")
+    public ResponseEntity<Map<String, Long>> getFacilityStats() {
+        List<Facility> facilities = facilityRepository.findAll();
+        long total = facilities.size();
+        long available = facilities.stream()
+                .filter(facility -> facility.getStatus() == FacilityStatus.ACTIVE)
+                .count();
+        long maintenance = facilities.stream()
+                .filter(facility -> facility.getStatus() == FacilityStatus.OUT_OF_SERVICE)
+                .count();
+
+        return ResponseEntity.ok(Map.of(
+                "total", total,
+                "available", available,
+                "maintenance", maintenance,
+                "bookedToday", 0L
+        ));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<FacilityResponseDto> getFacilityById(@PathVariable Long id) {
         FacilityResponseDto facility = facilityService.getFacilityById(id);

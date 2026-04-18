@@ -111,7 +111,7 @@ const styles = {
     background: "#112b46",
     padding: "20px",
     borderRadius: "12px",
-    color: "white",
+    color: 'var(--text-primary)',
   },
   heading: {
     marginBottom: "15px",
@@ -150,7 +150,7 @@ const styles = {
   },
   deleteBtn: {
     background: "#c62828",
-    color: "white",
+    color: 'var(--text-primary)',
     border: "none",
     padding: "8px 12px",
     borderRadius: "6px",
