@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityAdminPage from './FacilityAdminPage';
 import IncidentList from './IncidentList';
@@ -84,6 +84,146 @@ function Overview() {
   );
 }
 
+function ReportsDashboard() {
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('http://localhost:8085/api/tickets/summary', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch summary');
+        return res.json();
+      })
+      .then((data) => {
+        setSummary(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  }, []);
+
+  const handleDownload = () => {
+    fetch('http://localhost:8085/api/tickets/report/download', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ reportType: 'ALL_TIME' })
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to download report');
+        return res.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'incident-report.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  if (loading) {
+    return <div style={{ color: '#fff', padding: 20 }}>Loading report data...</div>;
+  }
+
+  if (!summary) {
+    return <div style={{ color: '#fff', padding: 20 }}>Failed to load report data.</div>;
+  }
+
+  const chartData = [
+    { label: 'Open', value: summary.openTickets, color: '#f59e0b' },
+    { label: 'In Progress', value: summary.inProgressTickets, color: '#3b82f6' },
+    { label: 'Resolved', value: summary.resolvedTickets, color: '#10b981' },
+    { label: 'Closed', value: summary.closedTickets, color: '#6b7280' },
+    { label: 'Rejected', value: summary.rejectedTickets, color: '#ef4444' },
+  ];
+
+  const maxVal = Math.max(...chartData.map((d) => d.value), 1);
+
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <div>
+          <h2 style={S.welcomeTitle}>Incident Analysis & Reporting</h2>
+          <p style={S.welcomeSub}>Real-time metrics and downloadable documents</p>
+        </div>
+        <button
+          onClick={handleDownload}
+          style={{
+            background: '#FFC107',
+            color: '#0D2137',
+            border: 'none',
+            padding: '10px 20px',
+            borderRadius: 8,
+            fontWeight: 'bold',
+            cursor: 'pointer',
+          }}
+        >
+          Download PDF Report
+        </button>
+      </div>
+
+      <div style={S.statsGrid}>
+        <div style={S.statCard}>
+          <div style={S.statLabel}>Total Received</div>
+          <div style={S.statValue}>{summary.totalTickets}</div>
+        </div>
+        <div style={S.statCard}>
+          <div style={S.statLabel}>Resolved</div>
+          <div style={S.statValue}>{summary.resolvedTickets}</div>
+        </div>
+      </div>
+
+          <div style={{ ...S.card, maxWidth: 600, margin: '0 0 20px 0' }}>
+            <div style={S.cardTitle}>Status Distribution Chart</div>
+            <div style={{ display: 'flex', alignItems: 'flex-end', height: 160, gap: 0, paddingTop: 20, paddingBottom: 10 }}>
+              {chartData.map((d) => {
+                const heightPct = (d.value / maxVal) * 100;
+                return (
+                  <div key={d.label} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', width: '100%', padding: '0 5%', justifyContent: 'center' }}>
+                      <div
+                        style={{
+                          width: '100%',
+                          maxWidth: '60px',
+                          height: `${heightPct}%`,
+                          background: d.color,
+                          borderTopLeftRadius: 6,
+                          borderTopRightRadius: 6,
+                          transition: 'height 0.5s ease',
+                          position: 'relative'
+                        }}
+                      >
+                        <span style={{ position: 'absolute', top: -20, left: '50%', transform: 'translateX(-50%)', color: '#fff', fontSize: 11, fontWeight: 'bold' }}>
+                          {d.value}
+                        </span>
+                      </div>
+                    </div>
+                    <div style={{ marginTop: 10, color: '#A0B0C4', fontSize: 10, textAlign: 'center' }}>
+                      {d.label}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+    </div>
+  );
+}
+
 function AdminDashboard() {
   const navigate = useNavigate();
   const [active, setActive] = useState('Overview');
@@ -120,13 +260,7 @@ function AdminDashboard() {
         );
 
       case 'Reports':
-        return (
-          <Placeholder
-            title="Reports & Analytics"
-            member="👤 Member 4 — All Services"
-            description="Aggregate data from all services to show reports and usage analytics."
-          />
-        );
+        return <ReportsDashboard />;
 
       case 'Settings':
         return (

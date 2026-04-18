@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import incidentService from '../services/incidentService';
 
-const IncidentList = () => {
+const IncidentList = ({ mode }) => {
     const [tickets, setTickets] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState({ status: '', priority: '' });
@@ -28,8 +28,15 @@ const IncidentList = () => {
     };
 
     const filteredTickets = tickets.filter(ticket => {
-        return (filter.status === '' || ticket.status === filter.status) &&
-               (filter.priority === '' || ticket.priority === filter.priority);
+        const matchesStatus = filter.status === '' || ticket.status === filter.status;
+        const matchesPriority = filter.priority === '' || ticket.priority === filter.priority;
+        
+        if (mode === 'completed') {
+            const isCompleted = ['RESOLVED', 'CLOSED', 'REJECTED'].includes(ticket.status);
+            return isCompleted && matchesStatus && matchesPriority;
+        }
+        
+        return matchesStatus && matchesPriority;
     });
 
     const getStatusStyle = (status) => {
@@ -68,15 +75,19 @@ const IncidentList = () => {
                 
                 {/* Header Section */}
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-                    <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: 'white', margin: 0 }}>Incident Tickets</h2>
-                    <button 
-                        onClick={() => navigate('/incidents/create')}
-                        style={{ padding: '10px 24px', backgroundColor: '#f5c400', color: '#091A2F', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', boxShadow: '0 4px 14px rgba(245, 196, 0, 0.2)', transition: 'transform 0.1s' }}
-                        onMouseDown={(e) => e.target.style.transform = 'scale(0.95)'}
-                        onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
-                    >
-                        + New Incident
-                    </button>
+                    <h2 style={{ fontSize: '28px', fontWeight: 'bold', color: 'white', margin: 0 }}>
+                        {mode === 'completed' ? 'Completed Tasks' : 'Incident Tickets'}
+                    </h2>
+                    {mode !== 'completed' && (
+                        <button 
+                            onClick={() => navigate('/incidents/create')}
+                            style={{ padding: '10px 24px', backgroundColor: '#f5c400', color: '#091A2F', fontWeight: 'bold', border: 'none', borderRadius: '8px', cursor: 'pointer', boxShadow: '0 4px 14px rgba(245, 196, 0, 0.2)', transition: 'transform 0.1s' }}
+                            onMouseDown={(e) => e.target.style.transform = 'scale(0.95)'}
+                            onMouseUp={(e) => e.target.style.transform = 'scale(1)'}
+                        >
+                            + New Incident
+                        </button>
+                    )}
                 </div>
 
                 {/* Filters Board */}
@@ -89,9 +100,9 @@ const IncidentList = () => {
                             onChange={handleFilterChange}
                             style={{ width: '100%', padding: '10px 16px', backgroundColor: '#0D2137', border: '1px solid #1A3A5A', color: 'white', borderRadius: '8px', outline: 'none' }}
                         >
-                            <option value="">All Statuses</option>
-                            <option value="OPEN">Open</option>
-                            <option value="IN_PROGRESS">In Progress</option>
+                            <option value="">{mode === 'completed' ? 'All Completed' : 'All Statuses'}</option>
+                            {mode !== 'completed' && <option value="OPEN">Open</option>}
+                            {mode !== 'completed' && <option value="IN_PROGRESS">In Progress</option>}
                             <option value="RESOLVED">Resolved</option>
                             <option value="CLOSED">Closed</option>
                             <option value="REJECTED">Rejected</option>
