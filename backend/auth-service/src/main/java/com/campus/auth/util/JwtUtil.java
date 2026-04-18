@@ -2,6 +2,7 @@ package com.campus.auth.util;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    @org.springframework.beans.factory.annotation.Value("${jwt.secret}")
+    @Value("${jwt.secret:SmartCampus2026SecretKeyForJWTTokenGeneration}")
     private String secret;
 
     private static final long EXPIRATION = 86400000; // 24 hours

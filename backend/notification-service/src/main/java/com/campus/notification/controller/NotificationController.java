@@ -3,7 +3,9 @@ package com.campus.notification.controller;
 import com.campus.notification.model.Notification;
 import com.campus.notification.service.NotificationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,16 @@ import java.util.Map;
 public class NotificationController {
 
     private final NotificationService notificationService;
+
+    // GET notifications by query param for easier frontend integration
+    @GetMapping
+    public ResponseEntity<List<Notification>> getNotificationsByQuery(
+            @RequestParam(required = false) Long userId) {
+        if (userId == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "userId query parameter is required");
+        }
+        return ResponseEntity.ok(notificationService.getUserNotifications(userId));
+    }
 
     // GET all notifications for a user
     @GetMapping("/user/{userId}")
@@ -36,10 +48,30 @@ public class NotificationController {
     @PostMapping
     public ResponseEntity<Notification> createNotification(
             @RequestBody Map<String, String> body) {
+        Long userId;
+        Notification.NotificationType type;
+
+        try {
+            userId = Long.parseLong(body.get("userId"));
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid or missing userId");
+        }
+
+        try {
+            type = Notification.NotificationType.valueOf(body.get("type").toUpperCase());
+        } catch (Exception ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid or missing notification type");
+        }
+
+        String message = body.get("message");
+        if (message == null || message.isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Message is required");
+        }
+
         Notification notification = notificationService.createNotification(
-                Long.parseLong(body.get("userId")),
-                Notification.NotificationType.valueOf(body.get("type")),
-                body.get("message")
+                userId,
+                type,
+                message.trim()
         );
         return ResponseEntity.ok(notification);
     }

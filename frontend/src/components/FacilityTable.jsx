@@ -32,7 +32,8 @@ function FacilityTable({ facilities, onEdit, onDelete, isAdmin = false }) {
                   </td>
                   <td style={styles.td}>{facility.location}</td>
                   <td style={styles.td}>
-                    {facility.availabilityStart} - {facility.availabilityEnd}
+                    {formatTime(facility.availabilityStart)} -{" "}
+                    {formatTime(facility.availabilityEnd)}
                   </td>
                   <td style={styles.td}>{formatStatus(facility.status)}</td>
                   <td style={styles.td}>{facility.description}</td>
@@ -89,12 +90,28 @@ function formatStatus(status) {
   return status;
 }
 
+function formatTime(time) {
+  if (!time) return "";
+
+  const parts = time.split(":");
+  if (parts.length < 2) return time;
+
+  let hour = parseInt(parts[0], 10);
+  const minute = parts[1];
+  const suffix = hour >= 12 ? "PM" : "AM";
+
+  hour = hour % 12;
+  if (hour === 0) hour = 12;
+
+  return `${String(hour).padStart(2, "0")}:${minute} ${suffix}`;
+}
+
 const styles = {
   container: {
     background: "#112b46",
     padding: "20px",
     borderRadius: "12px",
-    color: "white",
+    color: 'var(--text-primary)',
   },
   heading: {
     marginBottom: "15px",
@@ -133,7 +150,7 @@ const styles = {
   },
   deleteBtn: {
     background: "#c62828",
-    color: "white",
+    color: 'var(--text-primary)',
     border: "none",
     padding: "8px 12px",
     borderRadius: "6px",

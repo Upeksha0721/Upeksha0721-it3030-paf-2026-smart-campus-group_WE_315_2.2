@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import incidentService from '../services/incidentService';
 import IncidentList from './IncidentList';
+import FacilityStaffPage from "./FacilityStaffPage";
+import BookingStaffPage from "./BookingStaffPage";
 
 const Placeholder = ({ title, member, description }) => (
   <div style={{ padding: 40, textAlign: 'center' }}>
     <div style={{ fontSize: 48, marginBottom: 16 }}>🚧</div>
-    <div style={{ color: '#fff', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>{title}</div>
-    <div style={{ color: '#FFC107', fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{member}</div>
-    <div style={{ color: '#A0B0C4', fontSize: 14 }}>{description}</div>
+    <div style={{ color: 'var(--text-primary)', fontSize: 22, fontWeight: 700, marginBottom: 8 }}>{title}</div>
+    <div style={{ color: 'var(--accent-color)', fontSize: 13, fontWeight: 600, marginBottom: 12 }}>{member}</div>
+    <div style={{ color: 'var(--text-secondary)', fontSize: 14 }}>{description}</div>
   </div>
 );
 
@@ -18,6 +20,7 @@ const NAV = [
   { label: 'All Tickets', icon: '🎫' },
   { label: 'Completed',   icon: '🏁' },
   { label: 'Facilities',  icon: '🏢' },
+  { label: 'Bookings',    icon: '📅' },
   { label: 'Schedule',    icon: '📆' },
   { label: 'Account',     icon: '👤' },
 ];
@@ -201,7 +204,8 @@ function StaffDashboard() {
       case 'My Tasks':    return <MyTasks tickets={tickets} loading={loading} refreshData={fetchTickets} />;
       case 'All Tickets': return <IncidentList />;
       case 'Completed':   return <IncidentList mode="completed" />;
-      case 'Facilities':  return <Placeholder title="Facilities" member="👤 Member 1 — Facility Service" description="Connect to facility-service on port 8083 to browse campus facilities." />;
+      case 'Facilities':  return <FacilityStaffPage />;
+      case 'Bookings':    return <BookingStaffPage />;
       case 'Schedule':    return <Placeholder title="My Schedule" member="👤 Member 3 — Incident Service" description="Connect to incident-service on port 8085 to view assigned task schedule." />;
       case 'Account':     return <Placeholder title="Account Settings" member="👤 Member 4 (You) — Auth Service" description="Connect to auth-service on port 8081 to manage profile and settings." />;
       default:            return <MyTasks tickets={tickets} loading={loading} refreshData={fetchTickets} />;
@@ -225,7 +229,7 @@ function StaffDashboard() {
           <input style={S.search} placeholder="Search tickets, locations..." />
           <div style={{display:'flex',alignItems:'center',gap:12}}>
             <div style={S.bell}>🔔</div>
-            <div style={{...S.avatar,background:'#0A2A1A',color:'#4ade80'}}>TK</div>
+            <div style={{...S.avatar,background:'#0A2A1A',color:'var(--success-color)'}}>TK</div>
             <button onClick={handleLogout} style={S.logout}>Logout</button>
           </div>
         </div>
@@ -238,28 +242,28 @@ function StaffDashboard() {
 }
 
 const S = {
-  page:{display:'flex',minHeight:'100vh',background:'#091A2F',fontFamily:'Segoe UI,sans-serif'},
-  sidebar:{width:210,background:'#0D2137',borderRight:'1px solid #1A3A5A',padding:'16px 0',flexShrink:0},
-  logo:{padding:'0 16px 20px',fontSize:15,fontWeight:700,color:'#FFC107',borderBottom:'1px solid #1A3A5A',marginBottom:12},
-  navItem:{padding:'10px 16px',fontSize:13,color:'#A0B0C4',cursor:'pointer',borderLeft:'3px solid transparent',transition:'all 0.15s'},
-  navActive:{color:'#FFC107',borderLeftColor:'#FFC107',background:'#122A42'},
+  page:{display:'flex',minHeight:'100vh',background:'var(--bg-app)',fontFamily:'Segoe UI,sans-serif'},
+  sidebar:{width:210,background:'var(--bg-input)',borderRight:'1px solid var(--border-color)',padding:'16px 0',flexShrink:0},
+  logo:{padding:'0 16px 20px',fontSize:15,fontWeight:700,color:'var(--accent-color)',borderBottom:'1px solid var(--border-color)',marginBottom:12},
+  navItem:{padding:'10px 16px',fontSize:13,color:'var(--text-secondary)',cursor:'pointer',borderLeft:'3px solid transparent',transition:'all 0.15s'},
+  navActive:{color:'var(--accent-color)',borderLeftColor:'var(--accent-color)',background:'var(--bg-card)'},
   main:{flex:1,display:'flex',flexDirection:'column'},
-  topbar:{background:'#0D2137',borderBottom:'1px solid #1A3A5A',padding:'12px 20px',display:'flex',alignItems:'center',justifyContent:'space-between'},
-  search:{background:'#122A42',border:'1px solid #1A3A5A',borderRadius:8,padding:'7px 14px',color:'#fff',fontSize:13,width:220},
-  bell:{width:32,height:32,background:'#122A42',border:'1px solid #1A3A5A',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',fontSize:16},
-  avatar:{width:32,height:32,background:'#1A3A5A',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:700},
-  logout:{padding:'6px 12px',background:'transparent',border:'1px solid #1A3A5A',borderRadius:8,color:'#A0B0C4',fontSize:12,cursor:'pointer'},
+  topbar:{background:'var(--bg-input)',borderBottom:'1px solid var(--border-color)',padding:'12px 20px',display:'flex',alignItems:'center',justifyContent:'space-between'},
+  search:{background:'var(--bg-card)',border:'1px solid var(--border-color)',borderRadius:8,padding:'7px 14px',color:'var(--text-primary)',fontSize:13,width:220},
+  bell:{width:32,height:32,background:'var(--bg-card)',border:'1px solid var(--border-color)',borderRadius:8,display:'flex',alignItems:'center',justifyContent:'center',cursor:'pointer',fontSize:16},
+  avatar:{width:32,height:32,background:'var(--border-color)',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:700},
+  logout:{padding:'6px 12px',background:'transparent',border:'1px solid var(--border-color)',borderRadius:8,color:'var(--text-secondary)',fontSize:12,cursor:'pointer'},
   content:{padding:20,flex:1},
-  welcomeTitle:{color:'#fff',fontSize:20,fontWeight:600,marginBottom:4},
-  welcomeSub:{color:'#A0B0C4',fontSize:13,marginBottom:20},
+  welcomeTitle:{color:'var(--text-primary)',fontSize:20,fontWeight:600,marginBottom:4},
+  welcomeSub:{color:'var(--text-secondary)',fontSize:13,marginBottom:20},
   statsGrid:{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:12,marginBottom:20},
-  statCard:{background:'#122A42',border:'1px solid #1A3A5A',borderRadius:10,padding:14,borderTop:'3px solid #FFC107'},
-  statLabel:{color:'#A0B0C4',fontSize:11,marginBottom:6,textTransform:'uppercase'},
-  statValue:{color:'#fff',fontSize:22,fontWeight:700},
+  statCard:{background:'var(--bg-card)',border:'1px solid var(--border-color)',borderRadius:10,padding:14,borderTop:'3px solid var(--accent-color)'},
+  statLabel:{color:'var(--text-secondary)',fontSize:11,marginBottom:6,textTransform:'uppercase'},
+  statValue:{color:'var(--text-primary)',fontSize:22,fontWeight:700},
   twoCol:{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16},
-  card:{background:'#122A42',border:'1px solid #1A3A5A',borderRadius:10,padding:16},
-  cardTitle:{color:'#fff',fontSize:13,fontWeight:600,marginBottom:14},
-  btnYellow:{background:'#FFC107',color:'#091A2F',border:'none',padding:'9px 16px',borderRadius:8,fontSize:12,fontWeight:700,cursor:'pointer',width:'100%'},
+  card:{background:'var(--bg-card)',border:'1px solid var(--border-color)',borderRadius:10,padding:16},
+  cardTitle:{color:'var(--text-primary)',fontSize:13,fontWeight:600,marginBottom:14},
+  btnYellow:{background:'var(--accent-color)',color:'var(--bg-app)',border:'none',padding:'9px 16px',borderRadius:8,fontSize:12,fontWeight:700,cursor:'pointer',width:'100%'},
 };
 
 export default StaffDashboard;
