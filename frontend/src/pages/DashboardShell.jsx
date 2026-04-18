@@ -13,6 +13,7 @@ import BookingStaffPage from "./BookingStaffPage";
 import BookingStudentPage from "./BookingStudentPage";
 import AccountPage from "./AccountPage";
 import NotificationsPage from "./NotificationsPage";
+import IncidentList from "./IncidentList";
 import ModulePlaceholder from "./ModulePlaceholder";
 
 function OverviewPage({ role }) {
@@ -114,7 +115,7 @@ function DashboardShell() {
         } />
         <Route
           path="incidents"
-          element={<ModulePlaceholder title="Incidents Module" description="Incident ticketing screens can be integrated here once the incident service is finalized." />}
+          element={<IncidentList />}
         />
         <Route
           path="notifications"
@@ -122,11 +123,11 @@ function DashboardShell() {
         />
         <Route
           path="tickets"
-          element={<ModulePlaceholder title="All Tickets" description="This space is prepared for your complete technician ticket list and status management view." />}
+          element={<IncidentList />}
         />
         <Route
           path="completed"
-          element={<ModulePlaceholder title="Completed Tickets" description="Completed ticket history and resolution analytics can be added here." />}
+          element={<IncidentList mode="completed" />}
         />
         <Route
           path="schedule"
