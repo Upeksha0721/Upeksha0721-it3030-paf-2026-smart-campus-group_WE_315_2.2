@@ -83,9 +83,19 @@ function FacilityStudentPage() {
             type="number"
             placeholder="Minimum Capacity"
             value={filters.minCapacity}
-            onChange={(e) =>
-              setFilters({ ...filters, minCapacity: e.target.value })
-            }
+            min="0"
+            onKeyDown={(e) => {
+              if (e.key === "-" || e.key === "e") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              if (value === "" || Number(value) >= 0) {
+                setFilters({ ...filters, minCapacity: value });
+              }
+            }}
             style={styles.input}
           />
 

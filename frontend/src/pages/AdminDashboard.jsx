@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FacilityAdminPage from './FacilityAdminPage';
-<<<<<<< HEAD
 import IncidentList from './IncidentList';
-=======
-import BookingAdminPage from './BookingAdminPage';
-import UserManagementPage from './UserManagementPage';
-import ReportsPage from './ReportsPage';
-import SettingsPage from './SettingsPage';
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
 
 const Placeholder = ({ title, member, description }) => (
   <div style={{ padding: 40, textAlign: 'center' }}>
@@ -99,7 +92,6 @@ function AdminDashboard() {
 
   const renderContent = () => {
     switch (active) {
-<<<<<<< HEAD
       case 'Overview':
         return <Overview />;
 
@@ -147,16 +139,6 @@ function AdminDashboard() {
 
       default:
         return <Overview />;
-=======
-      case 'Overview':           return <Overview />;
-      case 'Booking Requests':   return <BookingAdminPage />;
-      case 'Facility Catalogue': return <FacilityAdminPage />;
-      case 'All Incidents':      return <Placeholder title="All Incidents"      member="👤 Member 3 — Incident Service"  description="Connect to incident-service on port 8085 to manage all incident tickets." />;
-      case 'User Management':    return <UserManagementPage />;
-      case 'Reports':            return <ReportsPage />;
-      case 'Settings':           return <SettingsPage />;
-      default:                   return <Overview />;
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
     }
   };
 
@@ -177,7 +159,8 @@ function AdminDashboard() {
 
       <div style={S.main}>
         <div style={S.topbar}>
-          <input style={S.search} placeholder={active === 'Facility Catalogue' ? 'Search facilities...' : 'Search users, bookings...'} />
+          <div style={S.topbarSpacer}></div>
+
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={S.bell}>🔔</div>
             <div style={{ ...S.avatar, background: 'var(--badge-bg)', color: 'var(--accent-color)' }}>AD</div>
@@ -194,27 +177,144 @@ function AdminDashboard() {
 }
 
 const S = {
-  page:        { display: 'flex', minHeight: '100vh', background: 'var(--bg-app)', fontFamily: 'Segoe UI, sans-serif' },
-  sidebar:     { width: 210, background: 'var(--bg-input)', borderRight: '1px solid var(--border-color)', padding: '16px 0', flexShrink: 0 },
-  logo:        { padding: '0 16px 20px', fontSize: 15, fontWeight: 700, color: 'var(--accent-color)', borderBottom: '1px solid var(--border-color)', marginBottom: 12 },
-  navItem:     { padding: '10px 16px', fontSize: 13, color: 'var(--text-secondary)', cursor: 'pointer', borderLeft: '3px solid transparent', transition: 'all 0.15s' },
-  navActive:   { color: 'var(--accent-color)', borderLeftColor: 'var(--accent-color)', background: 'var(--bg-card)' },
-  main:        { flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' },
-  topbar:      { background: 'var(--bg-input)', borderBottom: '1px solid var(--border-color)', padding: '12px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
-  search:      { background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 8, padding: '7px 14px', color: 'var(--text-primary)', fontSize: 13, width: 220 },
-  bell:        { width: 32, height: 32, background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', fontSize: 16 },
-  avatar:      { width: 32, height: 32, background: 'var(--border-color)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 700 },
-  logout:      { padding: '6px 12px', background: 'transparent', border: '1px solid var(--border-color)', borderRadius: 8, color: 'var(--text-secondary)', fontSize: 12, cursor: 'pointer' },
-  content:     { padding: 20, flex: 1, overflowY: 'auto' },
-  welcomeTitle:{ color: 'var(--text-primary)', fontSize: 20, fontWeight: 600, marginBottom: 4 },
-  welcomeSub:  { color: 'var(--text-secondary)', fontSize: 13, marginBottom: 20 },
-  statsGrid:   { display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 20 },
-  statCard:    { background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 10, padding: 14, borderTop: '3px solid var(--accent-color)' },
-  statLabel:   { color: 'var(--text-secondary)', fontSize: 11, marginBottom: 6, textTransform: 'uppercase' },
-  statValue:   { color: 'var(--text-primary)', fontSize: 22, fontWeight: 700 },
-  twoCol:      { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 },
-  card:        { background: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: 10, padding: 16 },
-  cardTitle:   { color: 'var(--text-primary)', fontSize: 13, fontWeight: 600, marginBottom: 14 },
+  page: {
+    display: 'flex',
+    minHeight: '100vh',
+    background: '#091A2F',
+    fontFamily: 'Segoe UI, sans-serif',
+  },
+  sidebar: {
+    width: 210,
+    background: '#0D2137',
+    borderRight: '1px solid #1A3A5A',
+    padding: '16px 0',
+    flexShrink: 0,
+  },
+  logo: {
+    padding: '0 16px 20px',
+    fontSize: 15,
+    fontWeight: 700,
+    color: '#FFC107',
+    borderBottom: '1px solid #1A3A5A',
+    marginBottom: 12,
+  },
+  navItem: {
+    padding: '10px 16px',
+    fontSize: 13,
+    color: '#A0B0C4',
+    cursor: 'pointer',
+    borderLeft: '3px solid transparent',
+    transition: 'all 0.15s',
+  },
+  navActive: {
+    color: '#FFC107',
+    borderLeftColor: '#FFC107',
+    background: '#122A42',
+  },
+  main: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  topbar: {
+    background: '#0D2137',
+    borderBottom: '1px solid #1A3A5A',
+    padding: '12px 20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  topbarSpacer: {
+    flex: 1,
+  },
+  bell: {
+    width: 32,
+    height: 32,
+    background: '#122A42',
+    border: '1px solid #1A3A5A',
+    borderRadius: 8,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    fontSize: 16,
+  },
+  avatar: {
+    width: 32,
+    height: 32,
+    background: '#1A3A5A',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 12,
+    fontWeight: 700,
+  },
+  logout: {
+    padding: '6px 12px',
+    background: 'transparent',
+    border: '1px solid #1A3A5A',
+    borderRadius: 8,
+    color: '#A0B0C4',
+    fontSize: 12,
+    cursor: 'pointer',
+  },
+  content: {
+    padding: 20,
+    flex: 1,
+  },
+  welcomeTitle: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 600,
+    marginBottom: 4,
+  },
+  welcomeSub: {
+    color: '#A0B0C4',
+    fontSize: 13,
+    marginBottom: 20,
+  },
+  statsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: 12,
+    marginBottom: 20,
+  },
+  statCard: {
+    background: '#122A42',
+    border: '1px solid #1A3A5A',
+    borderRadius: 10,
+    padding: 14,
+    borderTop: '3px solid #FFC107',
+  },
+  statLabel: {
+    color: '#A0B0C4',
+    fontSize: 11,
+    marginBottom: 6,
+    textTransform: 'uppercase',
+  },
+  statValue: {
+    color: '#fff',
+    fontSize: 22,
+    fontWeight: 700,
+  },
+  twoCol: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: 16,
+  },
+  card: {
+    background: '#122A42',
+    border: '1px solid #1A3A5A',
+    borderRadius: 10,
+    padding: 16,
+  },
+  cardTitle: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: 600,
+    marginBottom: 14,
+  },
 };
 
 export default AdminDashboard;
