@@ -102,8 +102,6 @@ function FacilityAdminPage() {
             Add, update, delete, and search campus facilities and assets.
           </p>
         </div>
-
-        <div style={styles.badge}>Module A</div>
       </div>
 
       {message && <div style={styles.message}>{message}</div>}
@@ -153,9 +151,19 @@ function FacilityAdminPage() {
             type="number"
             placeholder="Minimum Capacity"
             value={filters.minCapacity}
-            onChange={(e) =>
-              setFilters({ ...filters, minCapacity: e.target.value })
-            }
+            min="0"
+            onKeyDown={(e) => {
+              if (e.key === "-" || e.key === "e") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              if (value === "" || Number(value) >= 0) {
+                setFilters({ ...filters, minCapacity: value });
+              }
+            }}
             style={styles.input}
           />
 
@@ -198,13 +206,13 @@ function FacilityAdminPage() {
 const styles = {
   wrapper: {
     padding: "20px",
-    background: "#091A2F",
-    color: "white",
+    background: 'var(--bg-app)',
+    color: 'var(--text-primary)',
     minHeight: "100%",
   },
   headerCard: {
-    background: "#122A42",
-    border: "1px solid #1A3A5A",
+    background: 'var(--bg-card)',
+    border: "1px solid var(--border-color)",
     borderRadius: "12px",
     padding: "20px",
     marginBottom: "20px",
@@ -217,34 +225,25 @@ const styles = {
     margin: 0,
     fontSize: "26px",
     fontWeight: 700,
-    color: "#fff",
+    color: 'var(--text-primary)',
   },
   pageSubtitle: {
     marginTop: "8px",
     marginBottom: 0,
-    color: "#A0B0C4",
+    color: 'var(--text-secondary)',
     fontSize: "14px",
   },
-  badge: {
-    background: "#2A1A0A",
-    color: "#FFC107",
-    padding: "8px 14px",
-    borderRadius: "999px",
-    fontSize: "12px",
-    fontWeight: 700,
-    whiteSpace: "nowrap",
-  },
   message: {
-    background: "#1a3a5a",
-    color: "#fff",
+    background: 'var(--border-color)',
+    color: 'var(--text-primary)',
     padding: "12px 14px",
     borderRadius: "10px",
     marginBottom: "18px",
     border: "1px solid #23496f",
   },
   sectionCard: {
-    background: "#122A42",
-    border: "1px solid #1A3A5A",
+    background: 'var(--bg-card)',
+    border: "1px solid var(--border-color)",
     borderRadius: "12px",
     padding: "20px",
     marginBottom: "20px",
@@ -259,14 +258,14 @@ const styles = {
   },
   sectionTitle: {
     margin: 0,
-    color: "#fff",
+    color: 'var(--text-primary)',
     fontSize: "20px",
     fontWeight: 700,
   },
   cancelTopBtn: {
     background: "transparent",
-    color: "#FFC107",
-    border: "1px solid #FFC107",
+    color: 'var(--accent-color)',
+    border: "1px solid var(--accent-color)",
     borderRadius: "8px",
     padding: "8px 14px",
     cursor: "pointer",
@@ -281,14 +280,14 @@ const styles = {
   input: {
     padding: "10px",
     borderRadius: "8px",
-    border: "1px solid #1A3A5A",
-    background: "#0D2137",
-    color: "#fff",
+    border: "1px solid var(--border-color)",
+    background: 'var(--bg-input)',
+    color: 'var(--text-primary)',
     outline: "none",
   },
   searchBtn: {
-    background: "#FFC107",
-    color: "#091A2F",
+    background: 'var(--accent-color)',
+    color: 'var(--bg-app)',
     border: "none",
     borderRadius: "8px",
     padding: "10px",
@@ -297,7 +296,7 @@ const styles = {
   },
   resetBtn: {
     background: "#5B6470",
-    color: "white",
+    color: 'var(--text-primary)',
     border: "none",
     borderRadius: "8px",
     padding: "10px",
