@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
+import { jwtDecode } from 'jwt-decode';
+import incidentService from '../services/incidentService';
 import IncidentList from './IncidentList';
-=======
 import FacilityStaffPage from "./FacilityStaffPage";
 import BookingStaffPage from "./BookingStaffPage";
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
 
 const Placeholder = ({ title, member, description }) => (
   <div style={{ padding: 40, textAlign: 'center' }}>
@@ -26,81 +25,137 @@ const NAV = [
   { label: 'Account',     icon: '👤' },
 ];
 
-function MyTasks() {
+function MyTasks({ tickets, loading, refreshData }) {
+  const [updateData, setUpdateData] = useState({ ticketId: '', status: 'IN_PROGRESS' });
+  const [updating, setUpdating] = useState(false);
+
+  // Filter for active tickets
+  const activeTickets = tickets.filter(t => !['RESOLVED', 'CLOSED', 'REJECTED'].includes(t.status));
+  
+  // Calculate dynamic stats
+  const stats = [
+    ['Assigned Tickets', activeTickets.length.toString()],
+    ['High Priority', activeTickets.filter(t => t.priority === 'HIGH').length.toString()],
+    ['Resolved Total', tickets.filter(t => t.status === 'RESOLVED').length.toString()],
+    ['Current Load', activeTickets.length > 5 ? 'High' : 'Normal']
+  ];
+
+  const handleQuickUpdate = async () => {
+    if (!updateData.ticketId) return;
+    try {
+      setUpdating(true);
+      await incidentService.updateStatus(updateData.ticketId, { status: updateData.status });
+      refreshData();
+      setUpdateData({ ticketId: '', status: 'IN_PROGRESS' });
+    } catch (err) {
+      console.error(err);
+      alert('Failed to update status');
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  if (loading) return <div style={{ color: '#fff', padding: 20 }}>Refreshing your tasks...</div>;
+
   return (
     <>
       <h2 style={S.welcomeTitle}>Welcome back, Technician 👋</h2>
       <p style={S.welcomeSub}>View and manage your assigned maintenance tasks and incident tickets.</p>
+      
       <div style={S.statsGrid}>
-        {[['Assigned Tickets','8'],['High Priority','4'],['Resolved Today','2'],['Avg Resolution','3.2h']].map(([l,v]) => (
+        {stats.map(([l,v]) => (
           <div key={l} style={S.statCard}>
             <div style={S.statLabel}>{l}</div>
             <div style={S.statValue}>{v}</div>
           </div>
         ))}
       </div>
-      <div style={{...S.card,marginBottom:16}}>
+
+      <div style={{...S.card, marginBottom: 16}}>
         <div style={S.cardTitle}>My Assigned Incident Tickets</div>
-        <table style={{width:'100%',borderCollapse:'collapse',fontSize:12}}>
-          <thead>
-            <tr>{['Ticket ID','Issue','Location','Priority','Type','Status'].map(h => (
-              <th key={h} style={{background:'var(--bg-input)',color:'var(--text-secondary)',padding:'8px',textAlign:'left',borderBottom:'1px solid var(--border-color)'}}>{h}</th>
-            ))}</tr>
-          </thead>
-          <tbody>
-            {[['#TK-042','Broken projector','Lab A Block C','var(--danger-color)','High','Equipment','#3D2A00','var(--accent-color)','In Progress'],
-              ['#TK-039','AC unit failure','Room 3 Block B','var(--danger-color)','High','HVAC','#0A2A4A','#60a5fa','Assigned'],
-              ['#TK-037','Leaking pipe','Bathroom Block A','var(--danger-color)','High','Plumbing','#0A2A4A','#60a5fa','Assigned'],
-              ['#TK-035','Broken chairs x5','Hall B Block A','var(--accent-color)','Med','Furniture','#3D2A00','var(--accent-color)','In Progress'],
-              ['#TK-031','Light flickering','Corridor Block D','var(--success-color)','Low','Electrical','#0A2A4A','#60a5fa','Assigned']].map(([id,issue,loc,pc,pri,type,bg,sc,status]) => (
-              <tr key={id}>
-                <td style={{padding:'8px',color:'var(--accent-color)',borderBottom:'1px solid var(--border-color)',fontWeight:600}}>{id}</td>
-                <td style={{padding:'8px',color:'var(--text-primary)',borderBottom:'1px solid var(--border-color)'}}>{issue}</td>
-                <td style={{padding:'8px',color:'var(--text-secondary)',borderBottom:'1px solid var(--border-color)'}}>{loc}</td>
-                <td style={{padding:'8px',borderBottom:'1px solid var(--border-color)'}}><span style={{color:pc,fontSize:12}}>● {pri}</span></td>
-                <td style={{padding:'8px',color:'var(--text-secondary)',borderBottom:'1px solid var(--border-color)'}}>{type}</td>
-                <td style={{padding:'8px',borderBottom:'1px solid var(--border-color)'}}>
-                  <span style={{background:bg,color:sc,padding:'3px 10px',borderRadius:20,fontSize:11,fontWeight:600}}>{status}</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {activeTickets.length === 0 ? (
+          <div style={{ padding: 20, color: '#A0B0C4', textAlign: 'center' }}>No active assignments!</div>
+        ) : (
+          <table style={{width:'100%', borderCollapse:'collapse', fontSize:12}}>
+            <thead>
+              <tr>{['Ticket ID', 'Issue', 'Priority', 'Status', 'Last Update'].map(h => (
+                <th key={h} style={{background:'#0D2137', color:'#A0B0C4', padding:'8px', textAlign:'left', borderBottom:'1px solid #1A3A5A'}}>{h}</th>
+              ))}</tr>
+            </thead>
+            <tbody>
+              {activeTickets.map((t) => (
+                <tr key={t.id}>
+                  <td style={{padding:'8px', color:'#FFC107', borderBottom:'1px solid #1A3A5A', fontWeight:600}}>#{t.id}</td>
+                  <td style={{padding:'8px', color:'#fff', borderBottom:'1px solid #1A3A5A'}}>{t.category}</td>
+                  <td style={{padding:'8px', borderBottom:'1px solid #1A3A5A'}}>
+                    <span style={{color: t.priority === 'HIGH' ? '#f87171' : t.priority === 'MEDIUM' ? '#FFC107' : '#4ade80', fontSize:12}}>
+                      ● {t.priority}
+                    </span>
+                  </td>
+                  <td style={{padding:'8px', borderBottom:'1px solid #1A3A5A'}}>
+                    <span style={{
+                      background: t.status === 'IN_PROGRESS' ? '#3D2A00' : '#0A2A4A',
+                      color: t.status === 'IN_PROGRESS' ? '#FFC107' : '#60a5fa',
+                      padding:'3px 10px', borderRadius:20, fontSize:11, fontWeight:600
+                    }}>
+                      {t.status.replace('_', ' ')}
+                    </span>
+                  </td>
+                  <td style={{padding:'8px', color:'#A0B0C4', borderBottom:'1px solid #1A3A5A'}}>
+                    {new Date(t.updatedAt || t.createdAt).toLocaleDateString()}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
+
       <div style={S.twoCol}>
         <div style={S.card}>
           <div style={S.cardTitle}>Quick Status Update</div>
           <div style={{marginBottom:10}}>
-            <div style={{color:'var(--text-secondary)',fontSize:11,marginBottom:6}}>SELECT TICKET</div>
-            <select style={{width:'100%',background:'var(--bg-input)',border:'1px solid var(--border-color)',borderRadius:8,padding:'9px 12px',color:'var(--text-primary)',fontSize:13}}>
-              <option>#TK-042 — Broken projector</option>
-              <option>#TK-039 — AC unit failure</option>
+            <div style={{color:'#A0B0C4', fontSize:11, marginBottom:6}}>SELECT TICKET</div>
+            <select 
+              value={updateData.ticketId}
+              onChange={(e) => setUpdateData({...updateData, ticketId: e.target.value})}
+              style={{width:'100%', background:'#0D2137', border:'1px solid #1A3A5A', borderRadius:8, padding:'9px 12px', color:'#fff', fontSize:13}}
+            >
+              <option value="">Choose a ticket...</option>
+              {activeTickets.map(t => (
+                <option key={t.id} value={t.id}>#{t.id} — {t.category}</option>
+              ))}
             </select>
           </div>
           <div style={{marginBottom:12}}>
-            <div style={{color:'var(--text-secondary)',fontSize:11,marginBottom:6}}>NEW STATUS</div>
-            <select style={{width:'100%',background:'var(--bg-input)',border:'1px solid var(--border-color)',borderRadius:8,padding:'9px 12px',color:'var(--text-primary)',fontSize:13}}>
-              <option>In Progress</option>
-              <option>Resolved</option>
-              <option>Needs Parts</option>
+            <div style={{color:'#A0B0C4', fontSize:11, marginBottom:6}}>NEW STATUS</div>
+            <select 
+              value={updateData.status}
+              onChange={(e) => setUpdateData({...updateData, status: e.target.value})}
+              style={{width:'100%', background:'#0D2137', border:'1px solid #1A3A5A', borderRadius:8, padding:'9px 12px', color:'#fff', fontSize:13}}
+            >
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="RESOLVED">Resolved</option>
+              <option value="CLOSED">Closed</option>
             </select>
           </div>
-          <button style={S.btnYellow}>Update Status</button>
+          <button 
+            onClick={handleQuickUpdate}
+            disabled={updating || !updateData.ticketId}
+            style={{...S.btnYellow, opacity: (updating || !updateData.ticketId) ? 0.6 : 1}}
+          >
+            {updating ? 'Updating...' : 'Update Status'}
+          </button>
         </div>
         <div style={S.card}>
-          <div style={S.cardTitle}>Today's Schedule</div>
-          {[['Inspect Lab A projector','9:00 AM — Block C F2','#3D2A00','var(--accent-color)','Pending'],
-            ['Fix AC unit Room 3','11:00 AM — Block B F1','var(--danger-border)','var(--danger-color)','Urgent'],
-            ['Check leaking pipe','2:00 PM — Block A GF','#0A2A4A','#60a5fa','Scheduled'],
-            ['Replace broken chairs','4:00 PM — Block A Hall B','#0F4A2A','var(--success-color)','Optional']].map(([task,time,bg,color,status]) => (
-            <div key={task} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'10px 0',borderBottom:'1px solid var(--border-color)'}}>
-              <div>
-                <div style={{color:'var(--text-primary)',fontSize:13,fontWeight:500}}>{task}</div>
-                <div style={{color:'var(--text-secondary)',fontSize:11}}>{time}</div>
-              </div>
-              <span style={{background:bg,color,padding:'3px 10px',borderRadius:20,fontSize:11,fontWeight:600}}>{status}</span>
-            </div>
-          ))}
+          <div style={S.cardTitle}>Notifications & Alerts</div>
+          <div style={{ padding: '10px 0', color: '#A0B0C4', fontSize: 13 }}>
+            {activeTickets.length > 0 ? (
+              <div>You have {activeTickets.length} active tasks that need attention.</div>
+            ) : (
+              <div>All caught up! No urgent alerts.</div>
+            )}
+          </div>
         </div>
       </div>
     </>
@@ -110,24 +165,50 @@ function MyTasks() {
 function StaffDashboard() {
   const navigate = useNavigate();
   const [active, setActive] = useState('My Tasks');
+  const [tickets, setTickets] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  const fetchTickets = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await incidentService.getTickets();
+      setTickets(data);
+    } catch (err) {
+      console.error('Error fetching tickets:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setUser({
+          email: decoded.sub,
+          role: decoded.role
+        });
+      } catch (e) {
+        console.error('Error decoding token:', e);
+      }
+    }
+    fetchTickets();
+  }, [fetchTickets]);
+
   const handleLogout = () => { localStorage.clear(); navigate('/login'); };
 
   const renderContent = () => {
     switch (active) {
-      case 'My Tasks':    return <MyTasks />;
-<<<<<<< HEAD
+      case 'My Tasks':    return <MyTasks tickets={tickets} loading={loading} refreshData={fetchTickets} />;
       case 'All Tickets': return <IncidentList />;
-      case 'Completed':   return <IncidentList />;
-      case 'Facilities':  return <Placeholder title="Facilities" member="👤 Member 1 — Facility Service" description="Connect to facility-service on port 8083 to browse campus facilities." />;
-=======
-      case 'All Tickets': return <Placeholder title="All Tickets" member="👤 Member 3 — Incident Service" description="Connect to incident-service on port 8085 to view all incident tickets." />;
-      case 'Completed':   return <Placeholder title="Completed Tickets" member="👤 Member 3 — Incident Service" description="Connect to incident-service on port 8085 to view resolved and closed tickets." />;
+      case 'Completed':   return <IncidentList mode="completed" />;
       case 'Facilities':  return <FacilityStaffPage />;
       case 'Bookings':    return <BookingStaffPage />;
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
       case 'Schedule':    return <Placeholder title="My Schedule" member="👤 Member 3 — Incident Service" description="Connect to incident-service on port 8085 to view assigned task schedule." />;
       case 'Account':     return <Placeholder title="Account Settings" member="👤 Member 4 (You) — Auth Service" description="Connect to auth-service on port 8081 to manage profile and settings." />;
-      default:            return <MyTasks />;
+      default:            return <MyTasks tickets={tickets} loading={loading} refreshData={fetchTickets} />;
     }
   };
 

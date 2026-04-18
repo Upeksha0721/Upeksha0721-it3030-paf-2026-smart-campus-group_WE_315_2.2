@@ -13,10 +13,64 @@ const CreateIncident = () => {
     });
     const [images, setImages] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
+    // Validation functions
+    const validateDescription = (value) => {
+        if (value.length < 20) {
+            return 'Description must be at least 20 characters';
+        }
+        if (value.length > 200) {
+            return 'Description must not exceed 200 characters';
+        }
+        return '';
+    };
+
+    const validateContactDetails = (value) => {
+        if (!value) return 'Contact details are required';
+
+        // Check if it's a phone number (all digits)
+        const isPhoneNumber = /^\d+$/.test(value);
+        
+        if (isPhoneNumber) {
+            // Phone number must be exactly 10 digits
+            if (value.length !== 10) {
+                return 'Phone number must be exactly 10 digits';
+            }
+        } else {
+            // Room number - can contain letters, digits, and symbols
+            // Just check if it's not empty and has some valid characters
+            if (!/^[a-zA-Z0-9\-_#.,\s]+$/.test(value)) {
+                return 'Room number contains invalid characters';
+            }
+        }
+        return '';
+    };
+
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        let { name, value } = e.target;
+        
+        // Special handling for contact details - limit phone number to 10 digits
+        if (name === 'contactDetails') {
+            const isPhoneNumber = /^\d+$/.test(value);
+            
+            // If it's a phone number and exceeds 10 digits, truncate it
+            if (isPhoneNumber && value.length > 10) {
+                value = value.slice(0, 10);
+            }
+        }
+        
+        setFormData({ ...formData, [name]: value });
+        
+        // Validate field on change
+        if (name === 'description') {
+            const error = validateDescription(value);
+            setErrors(prev => ({ ...prev, description: error }));
+        } else if (name === 'contactDetails') {
+            const error = validateContactDetails(value);
+            setErrors(prev => ({ ...prev, contactDetails: error }));
+        }
     };
 
     const handleFileChange = (e) => {
@@ -36,6 +90,26 @@ const CreateIncident = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Validate all fields before submission
+        const descriptionError = validateDescription(formData.description);
+        const contactError = validateContactDetails(formData.contactDetails);
+        
+        if (descriptionError || contactError) {
+            setErrors({
+                description: descriptionError,
+                contactDetails: contactError
+            });
+            toast.error('Please fix validation errors before submitting');
+            return;
+        }
+
+        // Validate category
+        if (!formData.category) {
+            toast.error('Please select a category');
+            return;
+        }
+
         setLoading(true);
         try {
             // 1. Upload images to Supabase
@@ -93,10 +167,35 @@ const CreateIncident = () => {
                             name="description"
                             value={formData.description}
                             onChange={handleChange}
-                            style={{ width: '100%', padding: '12px 16px', backgroundColor: '#0a1628', border: '1px solid #1e2d4a', borderRadius: '10px', color: 'white', outline: 'none', fontSize: '15px', minHeight: '120px', resize: 'vertical' }}
+                            style={{ 
+                                width: '100%', 
+                                padding: '12px 16px', 
+                                backgroundColor: '#0a1628', 
+                                border: errors.description ? '2px solid #ef4444' : '1px solid #1e2d4a', 
+                                borderRadius: '10px', 
+                                color: 'white', 
+                                outline: 'none', 
+                                fontSize: '15px', 
+                                minHeight: '120px', 
+                                resize: 'vertical' 
+                            }}
                             placeholder="Please provide details about the issue..."
                             required
                         />
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                            <span style={{ 
+                                fontSize: '12px', 
+                                color: errors.description ? '#ef4444' : '#64748b'
+                            }}>
+                                {errors.description ? errors.description : `${formData.description.length}/200 characters`}
+                            </span>
+                            <span style={{ 
+                                fontSize: '12px', 
+                                color: formData.description.length >= 20 ? '#22c55e' : '#64748b'
+                            }}>
+                                {formData.description.length >= 20 ? '✓ Valid length' : 'Min 20 characters'}
+                            </span>
+                        </div>
                     </div>
 
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
@@ -120,10 +219,29 @@ const CreateIncident = () => {
                                 name="contactDetails"
                                 value={formData.contactDetails}
                                 onChange={handleChange}
-                                style={{ width: '100%', padding: '12px 16px', backgroundColor: '#0a1628', border: '1px solid #1e2d4a', borderRadius: '10px', color: 'white', outline: 'none', fontSize: '15px' }}
-                                placeholder="Phone number or room"
+                                style={{ 
+                                    width: '100%', 
+                                    padding: '12px 16px', 
+                                    backgroundColor: '#0a1628', 
+                                    border: errors.contactDetails ? '2px solid #ef4444' : '1px solid #1e2d4a', 
+                                    borderRadius: '10px', 
+                                    color: 'white', 
+                                    outline: 'none', 
+                                    fontSize: '15px' 
+                                }}
+                                placeholder="Phone number (10 digits) or room number"
                                 required
                             />
+                            {errors.contactDetails && (
+                                <span style={{ fontSize: '12px', color: '#ef4444', marginTop: '4px', display: 'block' }}>
+                                    {errors.contactDetails}
+                                </span>
+                            )}
+                            {!errors.contactDetails && formData.contactDetails && (
+                                <span style={{ fontSize: '12px', color: '#22c55e', marginTop: '4px', display: 'block' }}>
+                                    ✓ Valid contact details
+                                </span>
+                            )}
                         </div>
                     </div>
 
@@ -166,20 +284,20 @@ const CreateIncident = () => {
                     <div style={{ paddingTop: '16px' }}>
                         <button
                             type="submit"
-                            disabled={loading}
+                            disabled={loading || errors.description || errors.contactDetails || !formData.category}
                             style={{ 
                                 width: '100%', 
                                 padding: '16px', 
-                                backgroundColor: '#f5c400', 
+                                backgroundColor: (loading || errors.description || errors.contactDetails || !formData.category) ? '#a89300' : '#f5c400', 
                                 color: '#091A2F', 
                                 fontWeight: 'bold', 
                                 fontSize: '16px',
                                 borderRadius: '12px', 
                                 border: 'none',
-                                cursor: loading ? 'not-allowed' : 'pointer',
-                                opacity: loading ? 0.7 : 1,
+                                cursor: (loading || errors.description || errors.contactDetails || !formData.category) ? 'not-allowed' : 'pointer',
+                                opacity: (loading || errors.description || errors.contactDetails || !formData.category) ? 0.7 : 1,
                                 transition: 'all 0.2s ease',
-                                boxShadow: '0 4px 14px rgba(245, 196, 0, 0.2)'
+                                boxShadow: (loading || errors.description || errors.contactDetails || !formData.category) ? 'none' : '0 4px 14px rgba(245, 196, 0, 0.2)'
                             }}
                         >
                             {loading ? 'Submitting...' : 'Submit Ticket'}
