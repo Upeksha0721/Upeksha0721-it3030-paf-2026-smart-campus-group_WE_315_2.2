@@ -16,6 +16,7 @@ import NotificationsPage from "./NotificationsPage";
 import ModulePlaceholder from "./ModulePlaceholder";
 
 function OverviewPage({ role }) {
+  const isStudent = role !== "ADMIN" && role !== "STAFF" && role !== "TECHNICIAN";
   const roleTitle = role === "ADMIN" ? "Admin" : role === "STAFF" || role === "TECHNICIAN" ? "Staff" : "Student";
   const cards = role === "ADMIN"
     ? [
@@ -38,11 +39,22 @@ function OverviewPage({ role }) {
           ["Available Facilities", "5"],
         ];
 
+    const studentInfo = [
+      ["Today On Campus", "AI Lab workshop at 2:00 PM, Main Auditorium"],
+      ["Library Hours", "Open until 10:00 PM with quiet study zones"],
+      ["Career Center", "CV clinic slots available this week"],
+      ["Support Desk", "IT help desk active in Block B until 6:00 PM"],
+    ];
+
   return (
     <div style={overviewStyles.wrap}>
-      <div style={overviewStyles.hero}>
+        <div style={{ ...overviewStyles.hero, ...(isStudent ? overviewStyles.studentHero : {}) }}>
         <h2 style={overviewStyles.heroTitle}>{roleTitle} Overview</h2>
-        <p style={overviewStyles.heroSub}>A single, professional workspace with role-based modules and consistent navigation.</p>
+          <p style={overviewStyles.heroSub}>
+            {isStudent
+              ? "Your campus day at a glance: bookings, updates, events, and student services in one place."
+              : "A single, professional workspace with role-based modules and consistent navigation."}
+          </p>
       </div>
       <div style={overviewStyles.grid}>
         {cards.map(([label, value]) => (
@@ -52,6 +64,17 @@ function OverviewPage({ role }) {
           </div>
         ))}
       </div>
+
+        {isStudent && (
+          <div style={overviewStyles.studentInfoWrap}>
+            {studentInfo.map(([title, detail]) => (
+              <div key={title} style={overviewStyles.studentInfoCard}>
+                <div style={overviewStyles.studentInfoTitle}>{title}</div>
+                <div style={overviewStyles.studentInfoDetail}>{detail}</div>
+              </div>
+            ))}
+          </div>
+        )}
     </div>
   );
 }
@@ -141,6 +164,10 @@ const overviewStyles = {
     marginBottom: 20,
     boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
   },
+  studentHero: {
+    background: "linear-gradient(rgba(8, 24, 41, 0.35), rgba(8, 24, 41, 0.82)), url('/assets/sliit_bg.png')",
+    borderLeft: "4px solid var(--accent-color)",
+  },
   heroTitle: {
     margin: 0,
     color: 'var(--text-primary)',
@@ -156,6 +183,7 @@ const overviewStyles = {
     display: "grid",
     gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
     gap: 12,
+    marginBottom: 16,
   },
   card: {
     background: 'var(--bg-card)',
@@ -176,6 +204,30 @@ const overviewStyles = {
     lineHeight: 1.2,
     marginTop: 6,
     fontWeight: 700,
+  },
+  studentInfoWrap: {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: 12,
+  },
+  studentInfoCard: {
+    background: "var(--bg-card)",
+    border: "1px solid var(--border-color)",
+    borderRadius: 12,
+    padding: "14px 16px",
+  },
+  studentInfoTitle: {
+    color: "var(--accent-color)",
+    fontSize: 12,
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.4px",
+  },
+  studentInfoDetail: {
+    color: "var(--text-secondary)",
+    fontSize: 13,
+    lineHeight: 1.45,
+    marginTop: 8,
   },
 };
 

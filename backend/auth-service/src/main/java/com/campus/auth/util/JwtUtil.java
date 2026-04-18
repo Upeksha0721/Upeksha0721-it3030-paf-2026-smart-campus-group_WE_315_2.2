@@ -10,15 +10,9 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-<<<<<<< HEAD
-    @org.springframework.beans.factory.annotation.Value("${jwt.secret}")
-    private String secret;
-
-=======
     @Value("${jwt.secret:SmartCampus2026SecretKeyForJWTTokenGeneration}")
     private String secret;
-    
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
+
     private static final long EXPIRATION = 86400000; // 24 hours
 
     private Key getKey() {
@@ -48,20 +42,12 @@ public class JwtUtil {
 
     // Get role from token
     public String extractRole(String token) {
-<<<<<<< HEAD
         return Jwts.parserBuilder()
-=======
-        return (String) Jwts.parserBuilder()
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
                 .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
-<<<<<<< HEAD
                 .get("role", String.class);
-=======
-                .get("role");
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
     }
 
     // Validate token

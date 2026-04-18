@@ -34,12 +34,9 @@ public class JwtFilter extends OncePerRequestFilter {
             if (jwtUtil.validateToken(token)) {
                 String email = jwtUtil.extractEmail(token);
                 String role = jwtUtil.extractRole(token);
-<<<<<<< HEAD
-                String authority = role != null && role.startsWith("ROLE_") ? role : "ROLE_" + (role != null ? role : "USER");
-
-=======
-                String authority = role != null ? "ROLE_" + role : "ROLE_USER";
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
+                String authority = role != null && role.startsWith("ROLE_")
+                        ? role
+                        : "ROLE_" + (role != null ? role : "USER");
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 email, null,

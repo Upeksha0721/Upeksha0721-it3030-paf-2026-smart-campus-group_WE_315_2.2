@@ -2,18 +2,10 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import OAuthCallback from './pages/OAuthCallback';
-<<<<<<< HEAD
-import StudentDashboard from './pages/StudentDashboard';
-import AdminDashboard from './pages/AdminDashboard';
-import StaffDashboard from './pages/StaffDashboard';
-import FacilityAdminPage from './pages/FacilityAdminPage';
-import FacilityStudentPage from './pages/FacilityStudentPage';
 import IncidentList from './pages/IncidentList';
 import IncidentDetails from './pages/IncidentDetails';
 import CreateIncident from './pages/CreateIncident';
-=======
 import DashboardShell from './pages/DashboardShell';
->>>>>>> f1f8f56 (Clean repo, add .gitignore, remove build files, and update backend + frontend)
 
 function PrivateRoute({ children }) {
   return localStorage.getItem('token') ? children : <Navigate to="/login" />;

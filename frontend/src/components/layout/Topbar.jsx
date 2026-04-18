@@ -1,6 +1,8 @@
 import React from "react";
 
 function Topbar({ title, role, userName, onLogout }) {
+  const displayName = (userName || "Campus User").trim();
+
   const initials = (userName || "User")
     .split(" ")
     .map((part) => part[0])
@@ -17,6 +19,7 @@ function Topbar({ title, role, userName, onLogout }) {
 
       <div style={styles.right}>
         <span style={styles.roleChip}>{role || "USER"}</span>
+        <div style={styles.userName}>{displayName}</div>
         <div style={styles.avatar}>{initials}</div>
         <button type="button" onClick={onLogout} style={styles.logoutBtn}>
           Logout
@@ -62,6 +65,15 @@ const styles = {
     fontSize: 11,
     fontWeight: 700,
     letterSpacing: "0.4px",
+  },
+  userName: {
+    color: "var(--text-primary)",
+    fontSize: 13,
+    fontWeight: 700,
+    maxWidth: 220,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
   },
   avatar: {
     width: 34,
