@@ -25,4 +25,22 @@ public interface FacilityRepository extends JpaRepository<Facility, Long> {
 
     // filter by location only
     List<Facility> findByLocationContainingIgnoreCase(String location);
+
+    // filter by type + capacity
+    List<Facility> findByTypeAndCapacityGreaterThanEqual(
+            FacilityType type,
+            Integer capacity
+    );
+
+    // filter by type + location
+    List<Facility> findByTypeAndLocationContainingIgnoreCase(
+            FacilityType type,
+            String location
+    );
+
+    // filter by capacity + location
+    List<Facility> findByCapacityGreaterThanEqualAndLocationContainingIgnoreCase(
+            Integer capacity,
+            String location
+    );
 }
