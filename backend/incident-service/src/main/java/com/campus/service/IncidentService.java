@@ -16,7 +16,11 @@ import com.campus.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.lowagie.text.Document;
@@ -25,7 +29,6 @@ import com.lowagie.text.FontFactory;
 import com.lowagie.text.Image;
 import com.lowagie.text.PageSize;
 import com.lowagie.text.Paragraph;
-import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.PdfWriter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
@@ -43,11 +46,19 @@ public class IncidentService {
     private final TicketRepository ticketRepository;
     private final CommentRepository commentRepository;
     private final AttachmentRepository attachmentRepository;
+    private final RestTemplate restTemplate;
+
+    private static final String AUTH_SERVICE_URL = "http://localhost:8081/api/users/email/";
+    private static final String NOTIFICATION_SERVICE_URL = "http://localhost:8086/api/notifications";
 
     @Transactional
     public TicketDTO createTicket(TicketRequest request, String userId) {
         if (userId == null || userId.trim().isEmpty()) {
             throw new RuntimeException("User email is required for ticket creation");
+        }
+
+        if (request.getAttachmentUrls() != null && request.getAttachmentUrls().size() > 3) {
+            throw new RuntimeException("Maximum 3 image attachments are allowed");
         }
 
         Ticket ticket = Ticket.builder()
@@ -116,7 +127,13 @@ public class IncidentService {
             throw new RuntimeException("Access denied to update status");
         }
 
-        return mapToDTO(ticketRepository.save(ticket));
+        Ticket savedTicket = ticketRepository.save(ticket);
+        
+        // Notify user about status change
+        sendNotification(ticket.getUserId(), "INCIDENT", 
+            "The status of your incident #" + ticket.getId() + " (" + ticket.getCategory() + ") has been updated to " + ticket.getStatus());
+
+        return mapToDTO(savedTicket);
     }
 
     @Transactional
@@ -129,7 +146,13 @@ public class IncidentService {
                 .orElseThrow(() -> new RuntimeException("Ticket not found"));
 
         ticket.setAssignedTechnicianId(technicianId);
-        return mapToDTO(ticketRepository.save(ticket));
+        Ticket savedTicket = ticketRepository.save(ticket);
+
+        // Notify technician about assignment
+        sendNotification(technicianId, "INCIDENT", 
+            "You have been assigned to incident #" + ticket.getId() + " (" + ticket.getCategory() + ")");
+
+        return mapToDTO(savedTicket);
     }
 
     @Transactional
@@ -142,8 +165,21 @@ public class IncidentService {
                 .userId(userId)
                 .content(request.getContent())
                 .build();
+        
+        Comment savedComment = commentRepository.save(comment);
 
-        return mapToCommentDTO(commentRepository.save(comment));
+        // Notify stakeholders (if technician adds, notify user; if user adds, notify technician)
+        if (userId.equals(ticket.getUserId())) {
+            if (ticket.getAssignedTechnicianId() != null) {
+                sendNotification(ticket.getAssignedTechnicianId(), "INCIDENT", 
+                    "User added a new comment on ticket #" + ticket.getId());
+            }
+        } else if (userId.equals(ticket.getAssignedTechnicianId())) {
+            sendNotification(ticket.getUserId(), "INCIDENT", 
+                "Technician added a new comment on ticket #" + ticket.getId());
+        }
+
+        return mapToCommentDTO(savedComment);
     }
 
     @Transactional
@@ -267,6 +303,27 @@ public class IncidentService {
             return baos.toByteArray();
         } catch (Exception e) {
             throw new RuntimeException("Error generating report", e);
+        }
+    }
+
+    private void sendNotification(String email, String type, String message) {
+        try {
+            // 1. Resolve email to ID via auth-service
+            Map<String, Object> user = restTemplate.getForObject(AUTH_SERVICE_URL + email, Map.class);
+            if (user != null && user.get("id") != null) {
+                Object idObj = user.get("id");
+                
+                // 2. Send notification
+                Map<String, Object> requestBody = new HashMap<>();
+                requestBody.put("userId", idObj.toString());
+                requestBody.put("type", type);
+                requestBody.put("message", message);
+                
+                restTemplate.postForObject(NOTIFICATION_SERVICE_URL, requestBody, Map.class);
+            }
+        } catch (Exception e) {
+            // Log error but don't fail the primary transaction
+            System.err.println("Failed to send notification to " + email + ": " + e.getMessage());
         }
     }
 
