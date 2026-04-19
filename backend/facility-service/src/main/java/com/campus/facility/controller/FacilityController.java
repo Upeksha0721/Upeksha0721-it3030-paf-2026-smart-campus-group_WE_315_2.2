@@ -50,11 +50,12 @@ public class FacilityController {
     }
 
     // =========================
-    // GET FACILITY BY ID
+    // GET FACILITY STATS
     // =========================
     @GetMapping("/stats")
     public ResponseEntity<Map<String, Long>> getFacilityStats() {
         List<Facility> facilities = facilityRepository.findAll();
+
         long total = facilities.size();
         long available = facilities.stream()
                 .filter(facility -> facility.getStatus() == FacilityStatus.ACTIVE)
@@ -71,8 +72,11 @@ public class FacilityController {
         ));
     }
 
+    // =========================
+    // GET FACILITY BY ID
+    // =========================
     @GetMapping("/{id}")
-    public ResponseEntity<FacilityResponseDto> getFacilityById(@PathVariable Long id) {
+    public ResponseEntity<FacilityResponseDto> getFacilityById(@PathVariable("id") Long id) {
         FacilityResponseDto facility = facilityService.getFacilityById(id);
         return ResponseEntity.ok(facility);
     }
@@ -82,7 +86,7 @@ public class FacilityController {
     // =========================
     @PutMapping("/{id}")
     public ResponseEntity<FacilityResponseDto> updateFacility(
-            @PathVariable Long id,
+            @PathVariable("id") Long id,
             @Valid @RequestBody FacilityRequestDto requestDto
     ) {
         FacilityResponseDto updatedFacility = facilityService.updateFacility(id, requestDto);
@@ -93,7 +97,7 @@ public class FacilityController {
     // DELETE FACILITY
     // =========================
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteFacility(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFacility(@PathVariable("id") Long id) {
         facilityService.deleteFacility(id);
         return ResponseEntity.ok("Facility deleted successfully");
     }
@@ -103,56 +107,12 @@ public class FacilityController {
     // =========================
     @GetMapping("/search")
     public ResponseEntity<List<FacilityResponseDto>> searchFacilities(
-            @RequestParam(required = false) FacilityType type,
-            @RequestParam(required = false) Integer minCapacity,
-            @RequestParam(required = false) String location
+            @RequestParam(value = "type", required = false) FacilityType type,
+            @RequestParam(value = "minCapacity", required = false) Integer minCapacity,
+            @RequestParam(value = "location", required = false) String location
     ) {
-
-        List<Facility> facilities;
-
-        // All filters
-        if (type != null && minCapacity != null && location != null) {
-            facilities = facilityRepository
-                    .findByTypeAndCapacityGreaterThanEqualAndLocationContainingIgnoreCase(
-                            type, minCapacity, location);
-
-        }
-        // Only type
-        else if (type != null) {
-            facilities = facilityRepository.findByType(type);
-
-        }
-        // Only capacity
-        else if (minCapacity != null) {
-            facilities = facilityRepository.findByCapacityGreaterThanEqual(minCapacity);
-
-        }
-        // Only location
-        else if (location != null) {
-            facilities = facilityRepository.findByLocationContainingIgnoreCase(location);
-
-        }
-        // No filters → return all
-        else {
-            facilities = facilityRepository.findAll();
-        }
-
-        // Convert Entity → DTO
-        List<FacilityResponseDto> response = facilities.stream()
-                .map(facility -> FacilityResponseDto.builder()
-                        .id(facility.getId())
-                        .name(facility.getName())
-                        .type(facility.getType())
-                        .capacity(facility.getCapacity())
-                        .location(facility.getLocation())
-                        .availabilityStart(facility.getAvailabilityStart())
-                        .availabilityEnd(facility.getAvailabilityEnd())
-                        .status(facility.getStatus())
-                        .description(facility.getDescription())
-                        .createdAt(facility.getCreatedAt())
-                        .updatedAt(facility.getUpdatedAt())
-                        .build())
-                .toList();
+        List<FacilityResponseDto> response =
+                facilityService.searchFacilities(type, minCapacity, location);
 
         return ResponseEntity.ok(response);
     }
