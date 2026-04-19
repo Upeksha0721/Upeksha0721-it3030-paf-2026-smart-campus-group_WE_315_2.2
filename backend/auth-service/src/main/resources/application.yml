@@ -6,7 +6,7 @@ spring:
     name: auth-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/campus_auth?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/campus_auth?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&zeroDateTimeBehavior=convertToNull
     username: root
     password: root1234
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -6,7 +6,7 @@ spring:
     name: facility-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/campus_facility?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Colombo
+    url: jdbc:mysql://localhost:3306/campus_facility?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Colombo&zeroDateTimeBehavior=convertToNull
     username: root
     password: root1234
     driver-class-name: com.mysql.cj.jdbc.Driver
