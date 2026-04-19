@@ -1,0 +1,85 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+      routes:
+        # Auth Service Routes
+        - id: auth-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=0
+
+        # Facility Service Routes
+        - id: facility-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/facilities/**
+          filters:
+            - StripPrefix=0
+            - AuthenticationFilter
+
+        # Booking Service Routes
+        - id: booking-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/bookings/**
+          filters:
+            - StripPrefix=0
+            - AuthenticationFilter
+
+        # Incident Service Routes
+        - id: incident-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/incidents/**
+          filters:
+            - StripPrefix=0
+            - AuthenticationFilter
+
+        # Notification Service Routes
+        - id: notification-service
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/notifications/**
+          filters:
+            - StripPrefix=0
+            - AuthenticationFilter
+
+# JWT Secret - must match auth-service
+jwt:
+  secret: your-secret-key-here-must-be-at-least-256-bits-long-for-hs256
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway
+  endpoint:
+    gateway:
+      enabled: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    com.campus: DEBUG
